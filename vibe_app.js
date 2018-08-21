@@ -168,12 +168,12 @@ function readCalendars() {
 		for(var ii = 0; ii<prev_month_lessons.length; ii++){
 			PML_full_names.push(prev_month_lessons[ii].getTitle()); 
 		}
-
+		
+		var location_col = 0; 
 		//get the location column
-		for(var jj = 17; jj !=420 ; jj++){
+		for(var jj = 17; location_col == 0 ; jj++){
 			if(roster.getRange(1, jj, 1,1).getValue() == 'Location'){
 				location_col = jj; 
-				jj = 420; 
 			}
 		}
 		
@@ -311,8 +311,8 @@ function readCalendars() {
 				}
 			}
 		   
-			tracker.getRange(first_empty, 10, 1,1).setValue(omb_lessons); 
-			tracker.getRange(first_empty, 11, 1,1).setValue(omb_cancels); 
+			tracker.getRange(first_empty, 8, 1,1).setValue(omb_lessons); 
+			tracker.getRange(first_empty, 9, 1,1).setValue(omb_cancels); 
 			
 			
 			///HERE IS A BREAK BETEWEEN ONE MONTH BACK AND LAST MONTH
