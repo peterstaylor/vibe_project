@@ -190,22 +190,10 @@ function readCalendars() {
 				jj = 420; 
 			}
 		}
-			
-		//get the lesson cost column
-		for(var jj = 17; jj !=420 ; jj++){
-			if(roster.getRange(1, jj, 1,1).getValue() == 'Lesson $ p/hour'){
-				cost_col = jj; 
-				jj = 420; 
-			}
-		}
-
-		//get the lesson cost column
-		for(var jj = 17; jj !=420 ; jj++){
-			if(roster.getRange(1, jj, 1,1).getValue() == 'Travel Fee $ p/location'){
-				travel_col = jj; 
-				jj = 420; 
-			}
-		}	
+        
+		// as long as things don't get moved around this is true
+		cost_col = location_col + 1; 
+		travel_col = cost_col + 1; 
 		
 		// next step is getting a list of students that the instructor works with 
 		var client_first = [];     // 2
