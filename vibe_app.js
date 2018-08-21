@@ -1,14 +1,21 @@
 function readCalendars() {
   var all_cals = CalendarApp.getAllCalendars(); 
   var num_cals = all_cals.length; 
+  
+  // this is an empty array to store the names of all the calendars
   var cal_names = []; 
+  
+  // get current date
   var now = new Date(); 
-  var month = now.getMonth();
-  var year = now.getFullYear(); 
-  var roster = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA').getSheets()[0]; 
-  var tracker = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0]; 
   // print when the script was run
   tracker.getRange(1, 2,1,1).setValue(now); 
+  var month = now.getMonth();
+  var year = now.getFullYear(); 
+  
+  // roster and tracker are the two spreadsheets we are dealing with 
+  var roster = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA').getSheets()[0]; 
+  var tracker = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0]; 
+  
   
    //now find the last row we are dealing with
    //color that demarcates active clients == #00ff00, i.e. that lime green color in the spreadsheet
