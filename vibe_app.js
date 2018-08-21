@@ -184,13 +184,13 @@ function readCalendars() {
 		}
 		
 		//get the location column
-		for(var jj = 17; jj !=420 ; jj++){
-			if(roster.getRange(1, jj, 1,1).getValue() == 'Location'){
-				location_col = jj; 
-				jj = 420; 
-			}
-		}
-        
+		//for(var jj = 17; jj !=420 ; jj++){
+		//	if(roster.getRange(1, jj, 1,1).getValue() == 'Location'){
+		//		location_col = jj; 
+		//		jj = 420; 
+		//	}
+		//}
+        location_col = 51; 
 		// as long as things don't get moved around this is true
 		cost_col = location_col + 1; 
 		travel_col = cost_col + 1; 
