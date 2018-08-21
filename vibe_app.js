@@ -1,4 +1,8 @@
 function readCalendars() {
+  // roster and tracker are the two spreadsheets we are dealing with 
+  var roster = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA').getSheets()[0]; 
+  var tracker = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0]; 
+  
   var all_cals = CalendarApp.getAllCalendars(); 
   var num_cals = all_cals.length; 
   
@@ -12,9 +16,7 @@ function readCalendars() {
   var month = now.getMonth();
   var year = now.getFullYear(); 
   
-  // roster and tracker are the two spreadsheets we are dealing with 
-  var roster = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA').getSheets()[0]; 
-  var tracker = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0]; 
+ 
   
   
    //now find the last row we are dealing with
