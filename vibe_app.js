@@ -169,31 +169,32 @@ function readCalendars() {
 			PML_full_names.push(prev_month_lessons[ii].getTitle()); 
 		}
 
+		//get the location column
+		for(var jj = 17; jj !=420 ; jj++){
+			if(roster.getRange(1, jj, 1,1).getValue() == 'Location'){
+				location_col = jj; 
+				jj = 420; 
+			}
+		}
+		
+		// as long as things don't get moved around this is true
+		cost_col = location_col + 1; 
+		travel_col = cost_col + 1; 
+		
 		// below returns the column in the roster for the instructor we are dealing with
 		var name_length = cal_names[inst_count].length; 
 		//var students = []; 
 		var column = 0; 
-		for (var jj = 17; jj != 420; jj = jj + 2){
+		for (var jj = 17; jj < location_col; jj = jj + 2){
 			var column_val = roster.getRange(1, jj, 1, 1).getValue();                           // get instructor name column value
 			for(var kk = 0; (kk < name_length) && (column_val[kk] == cal_names[inst_count][kk]); kk++){  
 			}
 			if (kk == name_length){
 				column = jj; 
-				jj = 420; 
 			}
 		}
 		
-		//get the location column
-		//for(var jj = 17; jj !=420 ; jj++){
-		//	if(roster.getRange(1, jj, 1,1).getValue() == 'Location'){
-		//		location_col = jj; 
-		//		jj = 420; 
-		//	}
-		//}
-        location_col = 51; 
-		// as long as things don't get moved around this is true
-		cost_col = location_col + 1; 
-		travel_col = cost_col + 1; 
+
 		
 		// next step is getting a list of students that the instructor works with 
 		var client_first = [];     // 2
