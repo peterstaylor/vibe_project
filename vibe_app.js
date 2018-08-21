@@ -134,7 +134,7 @@ function readCalendars() {
   ///////////////////////////////////////////////////
   
 	//for(var inst_count = 0; inst_count < num_cals; inst_count++){
-		var inst_count = 2; 
+		var inst_count = 3; 
 			
 		// checking this month's lessons  
 		var this_month_lessons = all_cals[inst_count].getEvents(begin_this_month, end_this_month);   
