@@ -289,7 +289,7 @@ function readCalendars() {
 						var kk = 7; 
 
 						if(client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk+1, length_to_check)){
-							lessons = lessons + 1; 
+							omb_lessons = omb_lessons + 1; 
 						}
 					}
 					else{
@@ -307,12 +307,12 @@ function readCalendars() {
 						}		
 					  
 						if(client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk+1, kk+1+length_to_check)){
-							lessons = lessons + 1;  
+							omb_lessons = omb_lessons + 1;  
 						}
 					  
 						else{
 							if(client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(0, length_to_check)){
-								lessons = lessons + 1;  
+								omb_lessons = omb_lessons + 1;  
 							}
 						}
 					}
