@@ -231,7 +231,10 @@ function readCalendars() {
 			tracker.getRange(first_empty, 2, 1, 1).setValue(client_first[ii]); 
 			tracker.getRange(first_empty, 3, 1,1).setValue(guardian[ii]); 
 			tracker.getRange(first_empty, 4, 1,1).setValue(cal_names[inst_count]);                   
-			tracker.getRange(first_empty, 5, 1,1).setValue(lesson_cost[ii]); 
+			
+			// convert the per hour cost into the actual billable cost based on the fraction of an hour
+			var lesson_fee = lesson_cost[ii]*(lesson_dur[ii] / 60); 
+			tracker.getRange(first_empty, 5, 1,1).setValue(lesson_fee); 
 			tracker.getRange(first_empty, 6, 1,1).setValue(lesson_dur[ii]); 
 			tracker.getRange(first_empty, 7, 1, 1).setValue(travel_fee[ii]); 
 			
