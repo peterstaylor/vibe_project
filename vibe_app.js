@@ -143,7 +143,7 @@ function readCalendars() {
   ///////////////////////////////////////////////////
   
 	//for(var inst_count = 0; inst_count < num_cals; inst_count++){
-		var inst_count = 3; 
+		var inst_count = 0; 
 			
 		// checking this month's lessons  
 		var this_month_lessons = all_cals[inst_count].getEvents(begin_this_month, end_this_month);   
@@ -185,11 +185,9 @@ function readCalendars() {
 		var name_length = cal_names[inst_count].length; 
 		//var students = []; 
 		var column = 0; 
-		for (var jj = 17; jj < location_col; jj = jj + 2){
-			var column_val = roster.getRange(1, jj, 1, 1).getValue();                           // get instructor name column value
-			for(var kk = 0; (kk < name_length) && (column_val[kk] == cal_names[inst_count][kk]); kk++){  
-			}
-			if (kk == name_length){
+		for (var jj = 17; (jj < location_col) && (column == 0); jj = jj + 1){
+			var column_val = roster.getRange(1, jj, 1, 1).getValue().slice(1, name_length);                           // get instructor name column value
+			if (column_val == cal_names[inst_count].slice(1, name_length)){
 				column = jj; 
 			}
 		}
