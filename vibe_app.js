@@ -477,5 +477,8 @@ function readCalendars() {
           }
       } // END OF BIG LOOP 
       tracker.getRange(1, 5, 1, 1).setValue(0); 
+      var new_last_row = tracker.getLastRow(); 
+      var new_last_column = tracker.getLastColumn(); 
+      tracker.getRange(3, 1, new_last_row, new_last_column).sort({ column: 3, ascending: true });
   }
 }
