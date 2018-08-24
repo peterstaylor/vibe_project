@@ -191,11 +191,19 @@ function readCalendars() {
 		
 		// below returns the column in the roster for the instructor we are dealing with
 		var name_length = cal_names[inst_count].length; 
-		//var students = []; 
+
+        // need to handle when it returns and email address
+        for (var ii = 0; ii <= name_length; ii++){
+            if (cal_names[inst_count][ii] == '@') {
+                name_length = ii - 1; 
+            }
+        }
+        
 		var column = 0; 
 		for (var jj = 17; (jj < location_col) && (column == 0); jj = jj + 1){
-			var column_val = roster.getRange(1, jj, 1, 1).getValue().slice(1, name_length);                           // get instructor name column value
-			if (column_val == cal_names[inst_count].slice(1, name_length)){
+            var column_val = roster.getRange(1, jj, 1, 1).getValue().slice(0, name_length).toLowerCase();                           // get instructor name column value
+            Logger.log(column_val); 
+			if (column_val == cal_names[inst_count].slice(0, name_length).toLowerCase()){
 				column = jj; 
 			}
 		}
