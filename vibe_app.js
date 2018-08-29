@@ -6,7 +6,7 @@ function readCalendars() {
 
   // use this boolean in the spreadsheet to control if the function runs
   var boolean = tracker.getRange(1, 5, 1, 1).getValue(); 
-  if (boolean) {
+  if (boolean == 1) {
       // if there is info on the spreadsheet we need to clean it out
       if (last_row > 2) {
           cleanup();
@@ -476,9 +476,14 @@ function readCalendars() {
               }
           }
       } // END OF BIG LOOP 
-      tracker.getRange(1, 5, 1, 1).setValue(0); 
-      var new_last_row = tracker.getLastRow(); 
-      var new_last_column = tracker.getLastColumn(); 
+      tracker.getRange(1, 5, 1, 1).setValue(0);
+      var new_last_row = tracker.getLastRow();
+      var new_last_column = tracker.getLastColumn();
       tracker.getRange(3, 1, new_last_row, new_last_column).sort({ column: 3, ascending: true });
+  }
+  else if (boolean == 2) {
+      if (last_row > 2) {
+          cleanup();
+      }
   }
 }
