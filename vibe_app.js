@@ -515,6 +515,8 @@ function readCalendars() {
   else if (boolean == 2) {
       if (last_row > 2) {
           cleanup();
+          tracker.getRange(1, 5, 1, 1).setValue(0);
+          tracker.getRange(1, 2, 1, 1).setValue('');
       }
   }
 }
