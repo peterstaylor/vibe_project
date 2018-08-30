@@ -276,9 +276,11 @@ function readCalendars() {
 
                   for (jj = 0; jj < PML_full_names.length; jj++) {
                       // check if there was a cancellation 
+                      var kk = 0; 
+                      
                       if (PML_full_names[jj].slice(0, 6) == 'CANCEL' || PML_full_names[jj].slice(0, 7) == '[CANCEL' || PML_full_names[jj].slice(0, 7) == '(CANCEL') {
                           // skip the cancelled word and get to the name
-                          for (var kk = 0; PML_full_names[jj][kk] != ' '; kk++) { }
+                          for (; PML_full_names[jj][kk] != ' '; kk++) { }
 
                           if (PML_full_names[jj][kk + 1] == '-') {
                               kk = kk + 2;
@@ -286,6 +288,14 @@ function readCalendars() {
 
                           if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
                               omb_cancels = omb_cancels + 1;
+                          }
+                          if (kk < PML_full_names[jj].length-length_to_check) {
+                              for (; kk < PML_full_naes[jj].length - length_to_check){
+                                  if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                      omb_cancels = omb_cancels + 1;
+                                      kk = PML_full_naes[jj].length - length_to_check; 
+                                  }
+                              }
                           }
                       }
 
@@ -302,7 +312,7 @@ function readCalendars() {
                           }
                           else {
                               if (PML_full_names[jj].slice(0, 2).toUpperCase() == PML_full_names[jj].slice(0, 2)) {
-                                  for (var kk = 0; TML_full_names[jj][kk] != ' '; kk++) { }
+                                  for (var kk = 0; PML_full_names[jj][kk] != ' '; kk++) { }
                               }
 
                               if (PML_full_names[jj][kk + 1] == '-') {
