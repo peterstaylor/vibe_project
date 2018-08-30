@@ -288,12 +288,13 @@ function readCalendars() {
 
                           if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
                               omb_cancels = omb_cancels + 1;
+                              kk = PML_full_names[jj].length - length_to_check+1; 
                           }
                           if (kk < PML_full_names[jj].length-length_to_check) {
-                              for (; kk < PML_full_naes[jj].length - length_to_check){
+                              for (; kk <= PML_full_names[jj].length - length_to_check; kk++){
                                   if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
                                       omb_cancels = omb_cancels + 1;
-                                      kk = PML_full_naes[jj].length - length_to_check; 
+                                      kk = PML_full_names[jj].length - length_to_check+1; 
                                   }
                               }
                           }
@@ -308,7 +309,17 @@ function readCalendars() {
 
                               if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, length_to_check)) {
                                   omb_lessons = omb_lessons + 1;
+                                  kk = PML_full_names[jj].length - length_to_check; 
                               }
+                              if (kk < PML_full_names[jj].length - length_to_check) {
+                                  for (; kk <= PML_full_names[jj].length - length_to_check; kk++){
+                                      if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                          omb_lessons = omb_lessons + 1;
+                                          kk = PML_full_names[jj].length - length_to_check+1;
+                                      }
+                                  }
+                              }
+
                           }
                           else {
                               if (PML_full_names[jj].slice(0, 2).toUpperCase() == PML_full_names[jj].slice(0, 2)) {
@@ -326,11 +337,21 @@ function readCalendars() {
 
                               if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
                                   omb_lessons = omb_lessons + 1;
+                                  kk = PML_full_names[jj].length - length_to_check+1; 
                               }
 
                               else {
                                   if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(0, length_to_check)) {
                                       omb_lessons = omb_lessons + 1;
+                                      kk = PML_full_names[jj].length - length_to_check + 1; 
+                                  }
+                              }
+                              if (kk <= PML_full_names[jj].length - length_to_check) {
+                                  for (; kk < PML_full_names[jj].length - length_to_check; kk++){
+                                      if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                          omb_lessons = omb_lessons + 1;
+                                          kk = PML_full_names[jj].length - length_to_check+1;
+                                      }
                                   }
                               }
                           }
@@ -489,7 +510,7 @@ function readCalendars() {
       tracker.getRange(1, 5, 1, 1).setValue(0);
       var new_last_row = tracker.getLastRow();
       var new_last_column = tracker.getLastColumn();
-      tracker.getRange(3, 1, new_last_row, new_last_column).sort({ column: 3, ascending: true });
+      tracker.getRange(3, 1, new_last_row, new_last_column).sort({ column: 1, ascending: true });
   }
   else if (boolean == 2) {
       if (last_row > 2) {
