@@ -11,6 +11,6 @@ function final_sort() {
 	
 	for(var spread = 0; 
   }
-  Logger.log(names); 
+  
   Logger.log(names[3][0]); 
 }
