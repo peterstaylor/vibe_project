@@ -105,8 +105,8 @@ function readCalendars() {
           else if ((month == 3) || (month == 5) || (month == 8) || (month == 10)) {
               var end_this_month = new Date(year, month, 30, 23, 59, 59, 999);
               var end_next_month = new Date(year, month + 1, 31, 23, 59, 59, 999);
-              var begin_next_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
-              var end_next_month = new Date(year, month - 1, 31, 23, 59, 59, 999);
+              var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
+              var end_prev_month = new Date(year, month - 1, 31, 23, 59, 59, 999);
           }
           else if (month == 6) {
               var end_this_month = new Date(year, month, 31, 23, 59, 59, 999);
