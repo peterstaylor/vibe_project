@@ -5,8 +5,12 @@ function final_sort() {
   
   var point = 3;     // we start looking at row three
   
-  while (point <= last_row){
-	tracker.getRange(point, 
   
+ while (point <= last_row){
+	var names = tracker.getRange(3, 1, last_row, 3).getValues(); 
+	
+	for(var spread = 0; 
   }
+  Logger.log(names); 
+  Logger.log(names[3][0]); 
 }
