@@ -155,29 +155,41 @@ function readCalendars() {
             // checking this month's lessons  
             var this_month_lessons = all_cals[inst_count].getEvents(begin_this_month, end_this_month);
             // array that contains the titles of this month's lessons for each instructor
-            var TML_full_names = [];
+            var TML= [];
             for (var ii = 0; ii < this_month_lessons.length; ii++) {
-                TML_full_names.push(this_month_lessons[ii].getTitle());
+                var start = this_month_lessons[ii].getStartTime();
+                var end = this_month_lessons[ii].getEndTime();
+                var length = (end - start) / (1000 * 60 * 60);
+                var CAL = new CalendarInfo(this_month_lessons[ii].getTitle(), start, length, this_month_lessons[ii].getLocation());
+                TML.push(CAL);
             }
 
             // check next month's lessons
             var next_month_lessons = all_cals[inst_count].getEvents(begin_next_month, end_next_month);
             //create array that contains titles for next month's lessons
-            var NML_full_names = [];
+            var NML = [];
             for (var ii = 0; ii < next_month_lessons.length; ii++) {
-                NML_full_names.push(next_month_lessons[ii].getTitle());
+                var start = next_month_lessons[ii].getStartTime();
+                var end = next_month_lessons[ii].getEndTime();
+                var length = (end - start) / (1000 * 60 * 60);
+                var CAL = new CalendarInfo(next_month_lessons[ii].getTitle(), start, length, next_month_lessons[ii].getLocation());
+                NML.push(CAL);
             }
 
             // check previous month's lessons
             var prev_month_lessons = all_cals[inst_count].getEvents(begin_prev_month, end_prev_month);
             // array that contains titles for prev month lessons for each instructor
-            var PML_full_names = [];
+            var PML = [];
             for (var ii = 0; ii < prev_month_lessons.length; ii++) {
-                PML_full_names.push(prev_month_lessons[ii].getTitle());
+                var start = prev_month_lessons[ii].getStartTime();
+                var end = prev_month_lessons[ii].getEndTime();
+                var length = (end - start) / (1000 * 60 * 60);
+                var CAL = new CalendarInfo(prev_month_lessons[ii].getTitle(), start, length, prev_month_lessons[ii].getLocation());
+                PML.push(CAL);
             }
 
-            var location_col = 0;
             //get the location column
+            var location_col = 0;
             for (var jj = 17; location_col == 0; jj++) {
                 if (roster.getRange(1, jj, 1, 1).getValue() == 'Location') {
                     location_col = jj;
@@ -201,7 +213,7 @@ function readCalendars() {
             var column = 0;
             for (var jj = 17; (jj < location_col) && (column == 0); jj = jj + 1) {
                 var column_val = roster.getRange(1, jj, 1, 1).getValue().slice(0, name_length).toLowerCase();                           // get instructor name column value
-                Logger.log(column_val);
+                
                 if (column_val == cal_names[inst_count].slice(0, name_length).toLowerCase()) {
                     column = jj;
                 }
@@ -274,27 +286,27 @@ function readCalendars() {
                         var length_to_check = client_first[ii].length;
                     }
 
-                    for (jj = 0; jj < PML_full_names.length; jj++) {
+                    for (jj = 0; jj < PML.length; jj++) {
                         // check if there was a cancellation 
                         var kk = 0;
 
-                        if (PML_full_names[jj].slice(0, 6) == 'CANCEL' || PML_full_names[jj].slice(0, 7) == '[CANCEL' || PML_full_names[jj].slice(0, 7) == '(CANCEL') {
+                        if (PML[jj].title.slice(0, 6) == 'CANCEL' || PML[jj].title.slice(0, 7) == '[CANCEL' || PML[jj].title.slice(0, 7) == '(CANCEL') {
                             // skip the cancelled word and get to the name
-                            for (; PML_full_names[jj][kk] != ' '; kk++) { }
+                            for (; PML[jj].title[kk] != ' '; kk++) { }
 
-                            if (PML_full_names[jj][kk + 1] == '-') {
+                            if (PML[jj].title[kk + 1] == '-') {
                                 kk = kk + 2;
                             }
 
-                            if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                            if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                 omb_cancels = omb_cancels + 1;
-                                kk = PML_full_names[jj].length - length_to_check + 1;
+                                kk = PML[jj].title.length - length_to_check + 1;
                             }
-                            if (kk < PML_full_names[jj].length - length_to_check) {
-                                for (; kk <= PML_full_names[jj].length - length_to_check; kk++) {
-                                    if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                            if (kk < PML[jj].title.length - length_to_check) {
+                                for (; kk <= PML[jj].title.length - length_to_check; kk++) {
+                                    if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                         omb_cancels = omb_cancels + 1;
-                                        kk = PML_full_names[jj].length - length_to_check + 1;
+                                        kk = PML[jj].title.length - length_to_check + 1;
                                     }
                                 }
                             }
@@ -304,53 +316,53 @@ function readCalendars() {
                         else {
                             // check for other conditions where there would be leading information
                             // as of right now it ignores all leading info except for cancellations
-                            if (PML_full_names[jj].slice(0, 7) == 'NO SHOW') {
+                            if (PML[jj].title.slice(0, 7) == 'NO SHOW') {
                                 var kk = 7;
 
-                                if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, length_to_check)) {
+                                if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(kk + 1, length_to_check)) {
                                     omb_lessons = omb_lessons + 1;
-                                    kk = PML_full_names[jj].length - length_to_check;
+                                    kk = PML[jj].title.length - length_to_check;
                                 }
-                                if (kk < PML_full_names[jj].length - length_to_check) {
-                                    for (; kk <= PML_full_names[jj].length - length_to_check; kk++) {
-                                        if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                if (kk < PML[jj].title.length - length_to_check) {
+                                    for (; kk <= PML[jj].title.length - length_to_check; kk++) {
+                                        if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                             omb_lessons = omb_lessons + 1;
-                                            kk = PML_full_names[jj].length - length_to_check + 1;
+                                            kk = PML[jj].title.length - length_to_check + 1;
                                         }
                                     }
                                 }
 
                             }
                             else {
-                                if (PML_full_names[jj].slice(0, 2).toUpperCase() == PML_full_names[jj].slice(0, 2)) {
-                                    for (var kk = 0; PML_full_names[jj][kk] != ' '; kk++) { }
+                                if (PML[jj].title.slice(0, 2).toUpperCase() == PML[jj].title.slice(0, 2)) {
+                                    for (var kk = 0; PML[jj].title[kk] != ' '; kk++) { }
                                 }
 
-                                if (PML_full_names[jj][kk + 1] == '-') {
+                                if (PML[jj].title[kk + 1] == '-') {
                                     kk = kk + 2;
                                 }
 
-                                if (PML_full_names[jj].slice(kk + 1, 2).toUpperCase() == PML_full_names[jj].slice(kk + 1, 2)) {
+                                if (PML[jj].title.slice(kk + 1, 2).toUpperCase() == PML[jj].title.slice(kk + 1, 2)) {
                                     // skip to th enext blank space
-                                    for (; PML_full_names[jj][kk] != ' ' && (kk < 20); kk++) { }
+                                    for (; PML[jj].title[kk] != ' ' && (kk < 20); kk++) { }
                                 }
 
-                                if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                     omb_lessons = omb_lessons + 1;
-                                    kk = PML_full_names[jj].length - length_to_check + 1;
+                                    kk = PML[jj].title.length - length_to_check + 1;
                                 }
 
                                 else {
-                                    if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(0, length_to_check)) {
+                                    if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(0, length_to_check)) {
                                         omb_lessons = omb_lessons + 1;
-                                        kk = PML_full_names[jj].length - length_to_check + 1;
+                                        kk = PML[jj].title.length - length_to_check + 1;
                                     }
                                 }
-                                if (kk <= PML_full_names[jj].length - length_to_check) {
-                                    for (; kk < PML_full_names[jj].length - length_to_check; kk++) {
-                                        if (client_first[ii].slice(0, length_to_check) == PML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                if (kk <= PML[jj].title.length - length_to_check) {
+                                    for (; kk < PML[jj].title.length - length_to_check; kk++) {
+                                        if (client_first[ii].slice(0, length_to_check) == PML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                             omb_lessons = omb_lessons + 1;
-                                            kk = PML_full_names[jj].length - length_to_check + 1;
+                                            kk = PML[jj].title.length - length_to_check + 1;
                                         }
                                     }
                                 }
@@ -376,17 +388,17 @@ function readCalendars() {
                     // jj is index of calendar events, we check each of them
                     // kk is the index of the letter in each string
 
-                    for (jj = 0; jj < TML_full_names.length; jj++) {
+                    for (jj = 0; jj < TML.length; jj++) {
                         // check if there was a cancellation 
-                        if (TML_full_names[jj].slice(0, 6) == 'CANCEL' || TML_full_names[jj].slice(0, 7) == '[CANCEL' || TML_full_names[jj].slice(0, 7) == '(CANCEL') {
+                        if (TML[jj].title.slice(0, 6) == 'CANCEL' || TML[jj].title.slice(0, 7) == '[CANCEL' || TML[jj].title.slice(0, 7) == '(CANCEL') {
                             // skip the cancelled word and get to the name
-                            for (var kk = 0; TML_full_names[jj][kk] != ' '; kk++) { }
+                            for (var kk = 0; TML[jj].title[kk] != ' '; kk++) { }
 
-                            if (TML_full_names[jj][kk + 1] == '-') {
+                            if (TML[jj].title[kk + 1] == '-') {
                                 kk = kk + 2;
                             }
 
-                            if (client_first[ii].slice(0, length_to_check) == TML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                            if (client_first[ii].slice(0, length_to_check) == TML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                 cancellations = cancellations + 1;
                             }
                         }
@@ -395,34 +407,33 @@ function readCalendars() {
                         else {
                             // check for other conditions where there would be leading information
                             // as of right now it ignores all leading info except for cancellations
-                            if (TML_full_names[jj].slice(0, 7) == 'NO SHOW') {
+                            if (TML[jj].title.slice(0, 7) == 'NO SHOW') {
                                 var kk = 7;
-                                Logger.log(client_first[ii].slice(0, length_to_check));
-                                Logger.log(TML_full_names[jj].slice(kk + 1, length_to_check));
-                                if (client_first[ii].slice(0, length_to_check) == TML_full_names[jj].slice(kk + 1, length_to_check)) {
+                               
+                                if (client_first[ii].slice(0, length_to_check) == TML[jj].title.slice(kk + 1, length_to_check)) {
                                     lessons = lessons + 1;
                                 }
                             }
                             else {
-                                if (TML_full_names[jj].slice(0, 2).toUpperCase() == TML_full_names[jj].slice(0, 2)) {
-                                    for (var kk = 0; TML_full_names[jj][kk] != ' '; kk++) { }
+                                if (TML[jj].title.slice(0, 2).toUpperCase() == TML[jj].title.slice(0, 2)) {
+                                    for (var kk = 0; TML[jj].title[kk] != ' '; kk++) { }
                                 }
 
-                                if (TML_full_names[jj][kk + 1] == '-') {
+                                if (TML[jj].title[kk + 1] == '-') {
                                     kk = kk + 2;
                                 }
 
-                                if (TML_full_names[jj].slice(kk + 1, 2).toUpperCase() == TML_full_names[jj].slice(kk + 1, 2)) {
+                                if (TML[jj].title.slice(kk + 1, 2).toUpperCase() == TML[jj].title.slice(kk + 1, 2)) {
                                     // skip to th enext blank space
-                                    for (; TML_full_names[jj][kk] != ' ' && (kk < 20); kk++) { }
+                                    for (; TML[jj].title[kk] != ' ' && (kk < 20); kk++) { }
                                 }
 
-                                if (client_first[ii].slice(0, length_to_check) == TML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                if (client_first[ii].slice(0, length_to_check) == TML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                     lessons = lessons + 1;
                                 }
 
                                 else {
-                                    if (client_first[ii].slice(0, length_to_check) == TML_full_names[jj].slice(0, length_to_check)) {
+                                    if (client_first[ii].slice(0, length_to_check) == TML[jj].title.slice(0, length_to_check)) {
                                         lessons = lessons + 1;
                                     }
                                 }
@@ -440,19 +451,19 @@ function readCalendars() {
                     var bill_date = 0;
                     var bill_boolean = 1;
 
-                    for (jj = 0; jj < NML_full_names.length; jj++) {
+                    for (jj = 0; jj < NML.length; jj++) {
                         // check if there was a cancellation 
-                        if (NML_full_names[jj].slice(0, 6) == 'CANCEL' || NML_full_names[jj].slice(0, 7) == '[CANCEL' || NML_full_names[jj].slice(0, 7) == '(CANCEL') {
+                        if (NML[jj].title.slice(0, 6) == 'CANCEL' || NML[jj].title.slice(0, 7) == '[CANCEL' || NML[jj].title.slice(0, 7) == '(CANCEL') {
 
                             // skip the cancelled word and get to the name
-                            for (var kk = 0; NML_full_names[jj][kk] != ' '; kk++) { }
+                            for (var kk = 0; NML[jj].title[kk] != ' '; kk++) { }
 
                             // skip hyphen
-                            if (NML_full_names[jj][kk + 1] == '-') {
+                            if (NML[jj].title[kk + 1] == '-') {
                                 kk = kk + 2;
                             }
 
-                            if (client_first[ii].slice(0, length_to_check) == NML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                            if (client_first[ii].slice(0, length_to_check) == NML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                 future_cancels = future_cancels + 1;
 
                                 //if(bill_boolean){
@@ -467,17 +478,17 @@ function readCalendars() {
                         else {
                             // check for other conditions where there would be leading information
                             // as of right now it ignores all leading info except for cancellations
-                            if (NML_full_names[jj].slice(0, 2).toUpperCase() == NML_full_names[jj].slice(0, 2)) {
+                            if (NML[jj].title.slice(0, 2).toUpperCase() == NML[jj].title.slice(0, 2)) {
                                 // skip to th enext blank space
-                                for (var kk = 0; NML_full_names[jj][kk] != ' '; kk++) { }
+                                for (var kk = 0; NML[jj].title[kk] != ' '; kk++) { }
 
                                 // iterate forward to skip hyphens
-                                if (NML_full_names[jj][kk + 1] == '-') {
+                                if (NML[jj].title[kk + 1] == '-') {
                                     kk = kk + 2;
                                 }
 
 
-                                if (client_first[ii].slice(0, length_to_check) == NML_full_names[jj].slice(kk + 1, kk + 1 + length_to_check)) {
+                                if (client_first[ii].slice(0, length_to_check) == NML[jj].title.slice(kk + 1, kk + 1 + length_to_check)) {
                                     future_lessons = future_lessons + 1;
                                     if (bill_boolean) {
                                         var bill_date = all_cals[inst_count].getEvents(begin_next_month, end_next_month)[jj].getStartTime();
@@ -486,7 +497,7 @@ function readCalendars() {
                                 }
                             }
                             else {
-                                if (client_first[ii].slice(0, length_to_check) == NML_full_names[jj].slice(0, length_to_check)) {
+                                if (client_first[ii].slice(0, length_to_check) == NML[jj].title.slice(0, length_to_check)) {
                                     future_lessons = future_lessons + 1;
                                     if (bill_boolean) {
                                         var bill_date = all_cals[inst_count].getEvents(begin_next_month, end_next_month)[jj].getStartTime();
@@ -510,7 +521,7 @@ function readCalendars() {
         tracker.getRange(1, 5, 1, 1).setValue(0);
         var new_last_row = tracker.getLastRow();
         var new_last_column = tracker.getLastColumn();
-        tracker.getRange(3, 1, new_last_row, new_last_column).sort({ column: 1, ascending: true });
+        final_sort(); 
     }
     else if (boolean == 2) {
         if (last_row > 2) {
