@@ -257,7 +257,7 @@ function readCalendars() {
                   // CHECK ONE MONTH BACK FOR COPMARISON
                   // placing lesson-based information into the spreadsheet 
                   // first check last month
-                  var omb_cancels = 0;
+                 
                   var omb_lessons = 0;
 
                   // loop through the values in the name array, match to student first name
@@ -359,7 +359,7 @@ function readCalendars() {
                   }
 
                   tracker.getRange(first_empty, 8, 1, 1).setValue(omb_lessons);
-                  tracker.getRange(first_empty, 9, 1, 1).setValue(omb_cancels);
+                  
 
 
                   ///HERE IS A BREAK BETEWEEN ONE MONTH BACK AND LAST MONTH
@@ -430,8 +430,8 @@ function readCalendars() {
                       }
                   }
 
-                  tracker.getRange(first_empty, 10, 1, 1).setValue(lessons);
-                  tracker.getRange(first_empty, 11, 1, 1).setValue(cancellations);
+                  tracker.getRange(first_empty, 9, 1, 1).setValue(lessons);
+                  
 
                   //CHECK THE NEXT MONTH, LOOK AHEAD TO FUTURE SCHEDULED APPOINTMENTS
 
@@ -496,13 +496,13 @@ function readCalendars() {
                           }
                       }
                   }
-                  tracker.getRange(first_empty, 12, 1, 1).setValue(future_lessons);
+                  tracker.getRange(first_empty, 10, 1, 1).setValue(future_lessons);
 
                   if (future_lessons == 0) {
                       bill_date = 'n/a';
                   }
 
-                  tracker.getRange(first_empty, 13, 1, 1).setValue(bill_date);
+                  tracker.getRange(first_empty, 11, 1, 1).setValue(bill_date);
 
               }
           }
