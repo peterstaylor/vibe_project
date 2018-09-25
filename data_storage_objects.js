@@ -5,8 +5,12 @@ function CalendarInfo(title, date, duration, location) {
     this.end = location; 
 }
 
-function StudentReturn(num_lessons, num_travelfees, lesson_length) {
-    this.num_lessons = num_lessons; 
-    this.num_travelfees = num_travelfees; 
+function StudentReturn(num_lessons_pm, num_lessons_tm, num_lessons_nm, num_tf_pm, num_tf_tm, num_tf_nm, lesson_length) {
+    this.num_lessons_pm = num_lessons_pm; 
+    this.num_lessons_tm = num_lessons_tm; 
+    this.num_lessons_nm = num_lessons_nm; 
+    this.num_tf_pm = num_tf_pm; 
+    this.num_tf_tm = num_tf_tm; 
+    this.num_tf_nm = num_tf_nm; 
     this.lesson_length = lesson_length; 
 }
