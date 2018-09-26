@@ -246,8 +246,8 @@ function test_ground() {
                     tracker.getRange(first_empty + jj, 11, 1, 1).setValue(All_Cal_Info[jj].num_tf_tm); // number of travel fees this month
                     tracker.getRange(first_empty + jj, 12, 1, 1).setValue(All_Cal_Info[jj].num_lessons_nm); // lessons next month
                     tracker.getRange(first_empty + jj, 13, 1, 1).setValue(All_Cal_Info[jj].num_tf_nm); // travel fees next month
-
-                    // still need to set the payment due date!!
+                    tracker.getRange(first_empty + jj, 14, 1, 1).setValue(All_Cal_Info[jj].bill_date; // print bill date
+                    
                 }
     } // end of big loop 
             tracker.getRange(1, 5, 1, 1).setValue(0); 

@@ -4,7 +4,7 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
     var lastname = client_l.split(' ')[0];  // default to using first value here too 
     // create an empty array to return the student information
     var Student_Info = []; 
-
+    var bill_bool = 0; 
     for (jj = 0; jj < events.length; jj++) {
 
         // split up the title by spaces 
@@ -92,7 +92,7 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
                                     var Line = new StudentReturn(0, 1, 0, 0, travel_fee, 0, events[jj].duration);
                                 }
                                 else {
-                                    var Line = new StudentReturn(0, 0, 1, 0, 0, travel_fee, events[jj].duration);
+                                    var Line = new StudentReturn(0, 0, 1, 0, 0, travel_fee, events[jj].duration, events.date);
                                 }
                                 Student_Info.push(Line);
                             }
@@ -145,6 +145,10 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
                                         Student_Info[row_of_info].num_lessons_tm++; 
                                     }
                                     else {
+                                        if (bill_bool == 0) {
+                                            Student_Info[row_of_info].bill_date = events[jj].date; 
+                                            bill_bool = 1; 
+                                        }
                                         Student_Info[row_of_info].num_tf_nm = Student_Info[row_of_info].num_tf_nm + travel_fee;
                                         Student_Info[row_of_info].num_lessons_nm++; 
                                     }
