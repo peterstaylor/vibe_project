@@ -2,7 +2,7 @@ function CalendarInfo(title, date, duration, location) {
     this.title = title; 
     this.date = date; 
     this.duration = duration; 
-    this.end = location; 
+    this.location = location; 
 }
 
 function StudentReturn(num_lessons_pm, num_lessons_tm, num_lessons_nm, num_tf_pm, num_tf_tm, num_tf_nm, lesson_length, bill_date) {

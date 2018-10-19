@@ -78,11 +78,13 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
                             // check if the student array is empty, i.e. it's the first match
                             if (Student_Info == []) {
                                 // check for a travel fee
-                                if (events[jj].location.split(' ')[0] == 'FEE') {
-                                    var travel_fee = 1;
-                                }
-                                else {
-                                    var travel_fee = 0;
+                                if (events[jj].location != '') {
+                                    if (events[jj].location.split(' ')[0] == 'FEE') {
+                                        var travel_fee = 1;
+                                    }
+                                    else {
+                                        var travel_fee = 0;
+                                    }
                                 }
                                 // below checks which set of lessons to increment if we are creating the first entry
                                 if (events[jj].date >= date1 && events[jj].date <= date2) {
@@ -99,13 +101,14 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
                             // if it's not the first time we have checked
                             else {
                                 // check for a travel fee
-                                if (events[jj].location.split(' ')[0] == 'FEE') {
-                                    var travel_fee = 1;
+                                if (events[jj].location != '') {
+                                    if (events[jj].location.split(' ')[0] == 'FEE') {
+                                        var travel_fee = 1;
+                                    }
+                                    else {
+                                        var travel_fee = 0;
+                                    }
                                 }
-                                else {
-                                    var travel_fee = 0;
-                                }
-
                                 // need to check if student had multiple lesson lengths
                                 var duration_check = events[jj].duration;
 
