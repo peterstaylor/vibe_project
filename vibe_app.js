@@ -4,6 +4,21 @@ function top_level() {
     var tracker = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0];
     var last_row = tracker.getLastRow();
 
+    //now find the last row we are dealing with
+    //color that demarcates active clients == #00ff00, i.e. that lime green color in the spreadsheet
+    var color_count = 0;
+    for (var ii = 1; color_count != 2; ii++) {
+        var row_color = roster.getRange(ii, 1).getBackground();
+        if (row_color == '#00ff00' && color_count == 0) {
+            color_count = 1;
+            var first_row = ii;
+        }
+        else if (row_color == '#00ff00' && color_count == 1) {
+            color_count = 2;
+            var last_row = ii;
+        }
+    }
+
     // use this boolean in the spreadsheet to control if the function runs
     var boolean = tracker.getRange(1, 5, 1, 1).getValue();
     if (boolean == 1) {
@@ -25,20 +40,7 @@ function top_level() {
         var month = now.getMonth();
         var year = now.getFullYear();
 
-        //now find the last row we are dealing with
-        //color that demarcates active clients == #00ff00, i.e. that lime green color in the spreadsheet
-        var color_count = 0;
-        for (var ii = 1; color_count != 2; ii++) {
-            var row_color = roster.getRange(ii, 1).getBackground();
-            if (row_color == '#00ff00' && color_count == 0) {
-                color_count = 1;
-                var first_row = ii;
-            }
-            else if (row_color == '#00ff00' && color_count == 1) {
-                color_count = 2;
-                var last_row = ii;
-            }
-        }
+
 
         // formatting date information 
         // december
@@ -241,11 +243,28 @@ function top_level() {
                         tracker.getRange(first_empty + jj, 6, 1, 1).setValue(travel_fee[ii]); // travel fee amount
                         tracker.getRange(first_empty + jj, 7, 1, 1).setValue(All_Cal_Info[jj].lesson_length); // lesson length 
                         tracker.getRange(first_empty + jj, 8, 1, 1).setValue(All_Cal_Info[jj].num_lessons_pm); // previous month lessons
-                        tracker.getRange(first_empty + jj, 9, 1, 1).setValue(All_Cal_Info[jj].num_tf_pm); // travel fees in previous month
+
+                        var tf_pm = All_Cal_Info[jj].num_tf_pm; 
+                        if (tf_pm == undefined) {
+                            tf_pm = 0; 
+                        }
+                        tracker.getRange(first_empty + jj, 9, 1, 1).setValue(tf_pm); // travel fees in previous month
                         tracker.getRange(first_empty + jj, 10, 1, 1).setValue(All_Cal_Info[jj].num_lessons_tm); // number of lessons in this month
-                        tracker.getRange(first_empty + jj, 11, 1, 1).setValue(All_Cal_Info[jj].num_tf_tm); // number of travel fees this month
+
+                        var tf_tm = All_Cal_Info[jj].num_tf_tm;
+                        if (tf_tm == undefined) {
+                            tf_tm = 0;
+                        }
+
+                        tracker.getRange(first_empty + jj, 11, 1, 1).setValue(tf_tm); // number of travel fees this month
                         tracker.getRange(first_empty + jj, 12, 1, 1).setValue(All_Cal_Info[jj].num_lessons_nm); // lessons next month
-                        tracker.getRange(first_empty + jj, 13, 1, 1).setValue(All_Cal_Info[jj].num_tf_nm); // travel fees next month
+
+                        var tf_nm = All_Cal_Info[jj].num_tf_nm;
+                        if (tf_nm == undefined) {
+                            tf_nm = 0;
+                        }
+
+                        tracker.getRange(first_empty + jj, 13, 1, 1).setValue(tf_nm); // travel fees next month
                         tracker.getRange(first_empty + jj, 14, 1, 1).setValue(All_Cal_Info[jj].bill_date); // print bill date
 
                     }
