@@ -5,20 +5,25 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
     // create an empty array to return the student information
     var Student_Info = []; 
     var bill_bool = 0; 
+    var travel_fee = 0; 
     for (jj = 0; jj < events.length; jj++) {
 
         // split up the title by spaces 
         var title = events[jj].title.split(' '); 
 
         // check for cancellation or free trial, neither get counted for billing
-        if (title[0] == 'CANCELLED' || title[0] == '[CANCELLED]' || title[0] == '(CANCELLED)' || title[0] == 'FREE') {
+        if (title[0] == 'CANCELED' || title[0] == 'CANCELLED' || title[0] == '[CANCELLED]' || title[0] == '(CANCELLED)' || title[0] == 'FREE') {
+        }
+
+        // check for cancellation or free trial, neither get counted for billing
+        else if (title[1] == 'CANCELED' || title[1] == 'CANCELLED' || title[1] == '[CANCELLED]' || title[1] == '(CANCELLED)' || title[1] == 'FREE') {
         }
 
         // if there was not a cancellation
         else {
             for (kk = 0; kk < title.length; kk++) {
                 // check if the name of the client is in the calendar event
-                if (title[kk] == firstname) {
+                if (title[kk] == firstname && title[kk+1] == lastname) {
                     // if the firstname is in the calendar event, then check for the last name for robustness
                     for (nn = 0; nn < title.length; nn++) {
                         //if (title[nn] == lastname) {
@@ -27,10 +32,10 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
                                 // check for a travel fee
                                 if (events[jj].location != '') {
                                     if (events[jj].location.split(' ')[0] == 'FEE') {
-                                        var travel_fee = 1;
+                                        travel_fee = 1;
                                     }
                                     else {
-                                        var travel_fee = 0;
+                                        travel_fee = 0;
                                     }
                                 }
                                 // below checks which set of lessons to increment if we are creating the first entry
