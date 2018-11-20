@@ -272,10 +272,10 @@ function top_level() {
         }
             tracker.getRange(1, 5, 1, 1).setValue(0);
             final_sort();
-            var last_row = tracker.getLastRow()-3; 
-            var last_column = tracker.getLastColumn(); 
-            var data_pass = tracker.getRange(3, 1, last_row, last_column);  
-            bill_date_handling(last_row, data_pass); 
+            //var last_row = tracker.getLastRow()-3; 
+            //var last_column = tracker.getLastColumn(); 
+            //var data_pass = tracker.getRange(3, 1, last_row, last_column).getValues();  
+            //bill_date_handling(last_row, data_pass, tracker); 
         }
         else if (boolean == 2) {
             if (last_row > 2) {
