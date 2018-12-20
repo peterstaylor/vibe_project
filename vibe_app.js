@@ -238,8 +238,8 @@ function top_level() {
                         tracker.getRange(first_empty + jj, 2, 1, 1).setValue(client_first[ii]); // client first
                         tracker.getRange(first_empty + jj, 3, 1, 1).setValue(guardian[ii]);  // guardian first
                         tracker.getRange(first_empty + jj, 4, 1, 1).setValue(cal_names[inst_count]); // instructor
-                        tracker.getRange(first_empty + jj, 5, 1, 1).setValue((lesson_cost[ii]) * All_Cal_Info[jj].lesson_length); // lesson cost
-                        tracker.getRange(first_empty + jj, 6, 1, 1).setValue(travel_fee[ii]); // travel fee amount
+                        tracker.getRange(first_empty + jj, 6, 1, 1).setValue((lesson_cost[ii]) * All_Cal_Info[jj].lesson_length); // lesson cost
+                        tracker.getRange(first_empty + jj, 5, 1, 1).setValue(travel_fee[ii]); // travel fee amount
                         tracker.getRange(first_empty + jj, 7, 1, 1).setValue(All_Cal_Info[jj].lesson_length); // lesson length 
                         tracker.getRange(first_empty + jj, 8, 1, 1).setValue(All_Cal_Info[jj].num_lessons_pm); // previous month lessons
 
