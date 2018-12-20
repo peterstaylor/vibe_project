@@ -23,7 +23,7 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
         else {
             for (kk = 0; kk < title.length; kk++) {
                 // check if the name of the client is in the calendar event
-                if ((title[kk] == firstname[0] && title[kk + 1]) || (title[kk] == firstname[0] && title[kk + 1] == firstname[1])) {
+                if ((title[kk] == firstname[0] && title[kk + 1] == lastname) || (title[kk] == firstname[0] && title[kk + 1] == firstname[1])) {
                     // if the firstname is in the calendar event, then check for the last name for robustness
                     for (nn = 0; nn < title.length; nn++) {
                         //if (title[nn] == lastname) {
