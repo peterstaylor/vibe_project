@@ -6,6 +6,8 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
     var Student_Info = [];
     var bill_bool = 0;
     var travel_fee = 0;
+    var now = new Date();
+    var month = now.getMonth();
     for (jj = 0; jj < events.length; jj++) {
 
         // split up the title by spaces 
@@ -39,14 +41,17 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
                                 }
                             }
                             // below checks which set of lessons to increment if we are creating the first entry
-                            if (events[jj].date >= date1 && events[jj].date <= date2) {
-                                var Line = new StudentReturn(1, 0, 0, travel_fee, 0, 0, events[jj].duration);
+
+
+                            if (events[jj].date >= date5) {
+                                var Line = new StudentReturn(0, 0, 1, 0, 0, travel_fee, events[jj].duration, events.date);
                             }
-                            else if (events[jj].date >= date3 && events[jj].date <= date4) {
+                            else if (events[jj].date >= date3) {
                                 var Line = new StudentReturn(0, 1, 0, 0, travel_fee, 0, events[jj].duration);
+                                
                             }
                             else {
-                                var Line = new StudentReturn(0, 0, 1, 0, 0, travel_fee, events[jj].duration, events.date);
+                                var Line = new StudentReturn(1, 0, 0, travel_fee, 0, 0, events[jj].duration);
                             }
                             Student_Info.push(Line);
                         }

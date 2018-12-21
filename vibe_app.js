@@ -47,7 +47,7 @@ function top_level() {
             var begin_this_month = new Date(year, month, 1, 0, 0, 0, 0);
             var end_this_month = new Date(year, month, 31, 23, 59, 59, 999);
             var begin_next_month = new Date(year + 1, 0, 1, 0, 0, 0, 0);
-            var end_next_month = new Date(year + 1, 0, 1, 31, 23, 59, 59, 999);
+            var end_next_month = new Date(year + 1, 0, 31, 23, 59, 59, 999);
             var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
             var end_prev_month = new Date(year, month - 1, 30, 23, 59, 59, 999);
         }
@@ -152,8 +152,8 @@ function top_level() {
             //var inst_count = 2;
             //tracker.getRange(1, 3, 1, 1).setValue(inst_count);
 
-
-            // put all lessons from the three month window into one data struture
+           
+            // read from all three months
             var tmo_lessons = all_cals[inst_count].getEvents(begin_prev_month, end_next_month);
             // array that contains the titles of this month's lessons for each instructor
             var LESSONS = [];
@@ -164,6 +164,7 @@ function top_level() {
                 var CAL = new CalendarInfo(tmo_lessons[ii].getTitle(), start, length, tmo_lessons[ii].getLocation());
                 LESSONS.push(CAL);
             }
+
 
             //get the location column
             var location_col = 0;
@@ -269,7 +270,7 @@ function top_level() {
                     }
                 } // end of big loop 
             }
-        }
+        } //UNCOMMENT HERE TO BRING BIG LOOP BACK IN 
             tracker.getRange(1, 5, 1, 1).setValue(0);
             final_sort();
             //var last_row = tracker.getLastRow()-3; 
