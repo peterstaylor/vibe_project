@@ -45,6 +45,7 @@ function scan_calendar(events, client_f, client_l, date1, date2, date3, date4, d
 
                             if (events[jj].date >= date5) {
                                 var Line = new StudentReturn(0, 0, 1, 0, 0, travel_fee, events[jj].duration, events.date);
+                                bill_bool = 1; 
                             }
                             else if (events[jj].date >= date3) {
                                 var Line = new StudentReturn(0, 1, 0, 0, travel_fee, 0, events[jj].duration);
