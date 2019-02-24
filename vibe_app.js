@@ -65,7 +65,7 @@ function top_level() {
                     var end_next_month = new Date(year, month + 1, 29, 23, 59, 59, 999);
                 }
                 else {
-                    var end_next_month = new Date(year, month + 1, 29, 23, 59, 59, 999);
+                    var end_next_month = new Date(year, month + 1, 28, 23, 59, 59, 999);
                 }
             }
 
