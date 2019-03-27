@@ -148,7 +148,7 @@ function top_level() {
         //BIG LOOP///////////////////////////////////////// 
         //HERE IS THE BIG LOOP ////////////////////////////
         ///////////////////////////////////////////////////
-        for (var inst_count = 0; inst_count < num_cals; inst_count++) {
+        for (var inst_count = 0; inst_count < num_cals; inst_count++) {//
             //var inst_count = 2;
             //tracker.getRange(1, 3, 1, 1).setValue(inst_count);
 
@@ -190,7 +190,7 @@ function top_level() {
 
             var column = 0;
             for (var jj = 17; (jj < location_col) && (column == 0); jj = jj + 1) {
-                var column_val = roster.getRange(1, jj, 1, 1).getValue().slice(0, name_length).toLowerCase();                           // get instructor name column value
+                var column_val = roster.getRange(1, jj, 1, 1).getValue().split(' ')[0].toLowerCase();                          // get instructor name column value
 
                 if (column_val == cal_names[inst_count].slice(0, name_length).toLowerCase()) {
                     column = jj;
