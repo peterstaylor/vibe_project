@@ -6,4 +6,15 @@ Working on Handling Calendar information on google calendars and google sheets i
 ### quickbooks integration 
 - figure out quickbooks API 
 - john has a "quickbooks online account" 
-- create a developer account
+- ideal situation would be for someone to receive an invoice the 
+day after their last lesson of each month, different for 
+different clients
+	-- look into triggers, triggering based on changes in 
+calendars 
+	-- 
+
+
+### google form 
+- end of day with lessons, email instructor and ask if the lesson 
+happened
+- based on their responses, it would update the calendar 
