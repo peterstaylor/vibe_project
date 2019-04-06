@@ -1,8 +1,6 @@
 # Project for Vibe Music Indy 
 Working on Handling Calendar information on google calendars and google sheets in order to simplify invoicing
 
-# test
-
 ### top priorities as of 04/06/2019
 1. google form for instructor calendars
 2. quickbooks integration 
