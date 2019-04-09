@@ -1,9 +1,17 @@
 function forms_todo() {
     var end = new Date();
     // check for other events within the last week that are not fixed
+    // NOTE: so going to need to add handling for the first time this is run 
+    // if we are going to scan over the last week everyone will get a bunch of events 
+    // add some kinda functionality that will set everything more than one day old ot Y!
     var start = end - 7*86400000;
     var start = new Date(start);
     var all_cals = CalendarApp.getAllCalendars();
+
+    // read in instructor emails  
+    var roster = SpreadsheetApp.openById('1zDeEDDzH7i7SLFz4YBZe6xRYOZXC0e7Ge3nbYgX0Ew4').getSheets()[0]; 
+    var rost_lr = roster.getLastRow(); 
+   
 
     for (var i = 0; i < all_cals.length; i++) {
         var events = all_cals[i].getEvents(start, end); 
