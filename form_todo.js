@@ -11,7 +11,8 @@ function forms_todo() {
     // read in instructor emails  
     var roster = SpreadsheetApp.openById('1zDeEDDzH7i7SLFz4YBZe6xRYOZXC0e7Ge3nbYgX0Ew4').getSheets()[0]; 
     var rost_lr = roster.getLastRow(); 
-   
+    var emails = roster.getRange(3, 5, rost_lr - 3, 1).getValues(); 
+    
 
     for (var i = 0; i < all_cals.length; i++) {
         var events = all_cals[i].getEvents(start, end); 
