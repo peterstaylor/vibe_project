@@ -14,7 +14,7 @@ different clients
 - look into triggers, triggering based on changes in 
 calendars 
 
-### google form 
+### google form for instrcutors
 - end of day with lessons, email instructor and ask if the lesson 
 happened
 - run the script at like 9:05pm 
@@ -36,6 +36,17 @@ or legit now show), free trial
 - respond again and show the outcome of that box being checked 
 - list everything as a "session" not a "lesson" in the end 
 - make whole thing responsive so it responds to questions
-- add functionality to handle if instrcutor doesn't respond 
+- add functionality to handle if instrcutor doesn
+'t respond 
 - use the notes section of the calendar to track if the thing 
 has been modified or shoudl be added to the "to do list" 
+
+### email to clients
+- subject "your lesson report" 
+- last month you had this many lessions
+- next month you hve this many lessons
+- is this correct? y/n
+- figure out a way to make the URL click or embed a form in the email
+- ideally the yes or no should be in the body of the email 
+- actually maybe they don't even click yes, only a "no" otherwise they can just ignore it 
+
