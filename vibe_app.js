@@ -32,91 +32,17 @@ function top_level() {
         // this is an empty array to store the names of all the calendars
         var cal_names = [];
 
-        // get current date
+        // print date to spreadsheet
         var now = new Date();
-        // print when the script was run
         tracker.getRange(1, 2, 1, 1).setValue(now);
-        var month = now.getMonth();
-        var year = now.getFullYear();
 
-
-
-        // formatting date information 
-        // december
-        if (month == 11) {
-            var begin_this_month = new Date(year, month, 1, 0, 0, 0, 0);
-            var end_this_month = new Date(year, month, 31, 23, 59, 59, 999);
-            var begin_next_month = new Date(year + 1, 0, 1, 0, 0, 0, 0);
-            var end_next_month = new Date(year + 1, 0, 31, 23, 59, 59, 999);
-            var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
-            var end_prev_month = new Date(year, month - 1, 30, 23, 59, 59, 999);
-        }
-
-        else {
-            var begin_this_month = new Date(year, month, 1, 0, 0, 0, 0);
-            var begin_next_month = new Date(year, month + 1, 1, 0, 0, 0, 0);
-
-            // january 
-            if (month == 0) {
-                var begin_prev_month = new Date(year - 1, 11, 1, 0, 0, 0, 0);
-                var end_prev_month = new Date(year - 1, 11, 31, 23, 59, 59, 999);
-                var end_this_month = new Date(year, month, 31, 23, 59, 59, 999);
-                if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) { 	// leap year
-                    var end_next_month = new Date(year, month + 1, 29, 23, 59, 59, 999);
-                }
-                else {
-                    var end_next_month = new Date(year, month + 1, 28, 23, 59, 59, 999);
-                }
-            }
-
-            // february
-            else if (month == 1) {
-                var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
-                var end_prev_month = new Date(year, month - 1, 31, 23, 59, 59, 999);
-
-                var end_next_month = new Date(year, month + 1, 31, 23, 59, 59, 999);
-                if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
-                    var end_this_month = new Date(year, month, 29, 23, 59, 59, 999);
-                }
-                else {
-                    var end_this_month = new Date(year, month, 28, 23, 59, 59, 999);
-                }
-            }
-            //march, may, august, october
-            else if ((month == 2) || (month == 4) || (month == 7) || (month == 9)) {
-                var end_this_month = new Date(year, month, 31, 23, 59, 59, 999);
-                var end_next_month = new Date(year, month + 1, 30, 23, 59, 59, 999);
-                var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
-                if (month == 2) {
-                    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
-                        var end_prev_month = new Date(year, 1, 29, 23, 59, 59, 999);
-                    }
-                    else {
-                        var end_prev_month = new Date(year, 1, 28, 23, 59, 59, 999);
-                    }
-                }
-                else if (month == 7) {
-                    var end_prev_month = new Date(year, month - 1, 31, 23, 59, 59, 999);
-                }
-                else {
-                    var end_prev_month = new Date(year, month - 1, 30, 23, 59, 59, 999);
-                }
-            }
-            // april, june, september, november
-            else if ((month == 3) || (month == 5) || (month == 8) || (month == 10)) {
-                var end_this_month = new Date(year, month, 30, 23, 59, 59, 999);
-                var end_next_month = new Date(year, month + 1, 31, 23, 59, 59, 999);
-                var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
-                var end_prev_month = new Date(year, month - 1, 31, 23, 59, 59, 999);
-            }
-            else if (month == 6) {
-                var end_this_month = new Date(year, month, 31, 23, 59, 59, 999);
-                var end_next_month = new Date(year, month + 1, 31, 23, 59, 59, 999);
-                var begin_prev_month = new Date(year, month - 1, 1, 0, 0, 0, 0);
-                var end_prev_month = new Date(year, month - 1, 30, 23, 59, 59, 999);
-            }
-
-        }
+        var dates = date_management(); 
+        var begin_prev_month = dates[0]; 
+        var end_prev_month = dates[1]; 
+        var begin_this_month = dates[2]; 
+        var end_this_month = dates[3]; 
+        var begin_next_month = dates[4]; 
+        var end_next_month = dates[5]; 
 
         // getting the first names of all the instructors 
         for (var ii = 0; ii < num_cals; ii++) {
