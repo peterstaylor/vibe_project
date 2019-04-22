@@ -1,4 +1,5 @@
 function forms_todo() {
+    // as of 4/20/19 we aren't doing this anymore
     var end = new Date();
     // check for other events within the last week that are not fixed
     // NOTE: so going to need to add handling for the first time this is run 
