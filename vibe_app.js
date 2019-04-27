@@ -4,19 +4,9 @@ function top_level() {
     var tracker = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0];
 
     //now find the last row we are dealing with
-    //color that demarcates active clients == #00ff00, i.e. that lime green color in the spreadsheet
-    var color_count = 0;
-    for (var ii = 1; color_count != 2; ii++) {
-        var row_color = roster.getRange(ii, 1).getBackground();
-        if (row_color == '#00ff00' && color_count == 0) {
-            color_count = 1;
-            var first_row = ii;
-        }
-        else if (row_color == '#00ff00' && color_count == 1) {
-            color_count = 2;
-            var last_row = ii;
-        }
-    }
+    //active range function returns starting line at position 0 in array
+    // and ending line in position 1 of the array
+    var active = active_range(roster); 
 
     // use this boolean in the spreadsheet to control if the function runs
     var boolean = tracker.getRange(1, 5, 1, 1).getValue();
@@ -132,7 +122,7 @@ function top_level() {
                 var location = [];          // location_col
                 var lesson_cost = [];       // cost_col
                 var travel_fee = [];        // travel_col   
-                for (ii = first_row + 1; ii < last_row; ii++) {
+                for (ii = active[0]; ii <= active[1]; ii++) {
                     if (roster.getRange(ii, column, 1, 1).getValue()) {
                         client_first.push(roster.getRange(ii, 2, 1, 1).getValue());
                         client_last.push(roster.getRange(ii, 1, 1, 1).getValue());
@@ -199,13 +189,9 @@ function top_level() {
         } //UNCOMMENT HERE TO BRING BIG LOOP BACK IN 
             tracker.getRange(1, 5, 1, 1).setValue(0);
             final_sort();
-            //var last_row = tracker.getLastRow()-3; 
-            //var last_column = tracker.getLastColumn(); 
-            //var data_pass = tracker.getRange(3, 1, last_row, last_column).getValues();  
-            //bill_date_handling(last_row, data_pass, tracker); 
         }
         else if (boolean == 2) {
-            if (last_row > 2) {
+            if (tracker.getLastRow() > 3) {
                 cleanup();
                 tracker.getRange(1, 5, 1, 1).setValue(0);
                 tracker.getRange(1, 2, 1, 1).setValue('');
