@@ -23,4 +23,18 @@ function client_emails() {
     for (ii = 0; ii < all_cals.length; ii++) {
         cal_names.push(all_cals[ii].getName().split(" ")[0].split("@")[0] + " " + all_cals[ii].getName().split(" ")[1]); 
     }
+
+    for (var i_count = 0; i_count < 1; i_count++) {
+        var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month); 
+        var lessons = []; 
+
+        // creating data objects for each lesson within the window we are considering
+        for (ii = 0; ii < lesson_pile.length; ii++) {
+            var start = lesson_pile[ii].getStartTime(); 
+            var end = lesson_pile[ii].getEndTime(); 
+            var length = (end - start) / (1000 * 60 * 60); 
+            var CAL = new CalendarInfo(lesson_pile[ii].getTitle(), start, length, lesson_pile[ii].getLocation()); 
+            lessons.push(CAL); 
+        }
+    }
 }
