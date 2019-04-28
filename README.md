@@ -49,4 +49,15 @@ has been modified or shoudl be added to the "to do list"
 - figure out a way to make the URL click or embed a form in the email
 - ideally the yes or no should be in the body of the email 
 - actually maybe they don't even click yes, only a "no" otherwise they can just ignore it 
+- would it be acceptable to just have multiple links that open up emails 
+to the correct instructors? that's def doable
+- some other form integration that creates teh form just in time? idk 
+could be too trick and slow 
 
+### integration of client emails and scanning calendar
+- these scripts are doing a lot of the same work, should integration 
+their shared functions
+- find instructor in master roster
+- opening calendars / removing unwanted calendars
+- generating meta data for events within a window 
+- 
