@@ -11,6 +11,7 @@ function client_emails() {
     var active = active_range(roster); 
 
     var all_cals = CalendarApp.getAllCalendars(); 
+    var cal_names = []; 
 
     // removing unneeded calendars
     for (var ii = 0; ii < all_cals.length; ii++) {
@@ -18,5 +19,8 @@ function client_emails() {
             all_cals.splice(ii, 1); 
         }
     }
-    
+
+    for (ii = 0; ii < all_cals.length; ii++) {
+        cal_names.push(all_cals[ii].getName().split(" ")[0].split("@")[0] + " " + all_cals[ii].getName().split(" ")[1]); 
+    }
 }
