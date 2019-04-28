@@ -10,5 +10,13 @@ function client_emails() {
 
     var active = active_range(roster); 
 
+    var all_cals = CalendarApp.getAllCalendars(); 
 
+    // removing unneeded calendars
+    for (var ii = 0; ii < all_cals.length; ii++) {
+        if ((all_cals[ii].getName() == 'Admin') || (all_cals[ii].getName() == '-')) {
+            all_cals.splice(ii, 1); 
+        }
+    }
+    
 }
