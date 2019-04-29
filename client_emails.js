@@ -42,12 +42,7 @@ function client_emails() {
             lessons.push(CAL); 
         }
 
-        var column = 0; 
-        var last_column = roster.getLastColumn(); 
-        var top_row = roster.getRange(1, 1, 1, last_column).getValues(); 
-
-        for (ii = 0; ii < top_row.length; ii++) {
-            if(cal_names[i_count][0])
-        }
+        // returning the column that counts up the number of instructor lessons 
+        var column = column_find(roster, cal_names); 
     }
 }
