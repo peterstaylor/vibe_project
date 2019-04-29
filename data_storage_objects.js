@@ -15,3 +15,8 @@ function StudentReturn(num_lessons_pm, num_lessons_tm, num_lessons_nm, num_tf_pm
     this.lesson_length = lesson_length; 
     this.bill_date = bill_date;
 }
+
+function instructor(fname, lname) {
+    this.firstname = fname; 
+    this.lastname = lname; 
+}

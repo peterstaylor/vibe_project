@@ -19,9 +19,14 @@ function client_emails() {
             all_cals.splice(ii, 1); 
         }
     }
-
+    var fname; 
+    var lname;
+    var inst; 
     for (ii = 0; ii < all_cals.length; ii++) {
-        cal_names.push(all_cals[ii].getName().split(" ")[0].split("@")[0] + " " + all_cals[ii].getName().split(" ")[1]); 
+        fname = all_cals[ii].getName().split(" ")[0].split("@")[0]; 
+        lname = all_cals[ii].getName().split(" ")[1]; 
+        inst = new instructor(fname, lname); 
+        cal_names.push(inst); 
     }
 
     for (var i_count = 0; i_count < 1; i_count++) {
@@ -35,6 +40,14 @@ function client_emails() {
             var length = (end - start) / (1000 * 60 * 60); 
             var CAL = new CalendarInfo(lesson_pile[ii].getTitle(), start, length, lesson_pile[ii].getLocation()); 
             lessons.push(CAL); 
+        }
+
+        var column = 0; 
+        var last_column = roster.getLastColumn(); 
+        var top_row = roster.getRange(1, 1, 1, last_column).getValues(); 
+
+        for (ii = 0; ii < top_row.length; ii++) {
+            if(cal_names[i_count][0])
         }
     }
 }
