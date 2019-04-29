@@ -5,7 +5,7 @@ function cleanup() {
   tracker.getRange(3, 1, last_row-2, last_column).setValue(""); 
 }
 
-function column_find(roster, cal_names) {
+function column_find(roster, cal_names, i_count) {
     var column = 0;
     var last_column = roster.getLastColumn();
     var top_row = roster.getRange(1, 1, 1, last_column).getValues();
