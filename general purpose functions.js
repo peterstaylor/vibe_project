@@ -17,3 +17,17 @@ function column_find(roster, cal_names, i_count) {
 
     return column; 
 }
+
+function calendar_names(all_cals) {
+    var fname, lname, inst; 
+    var cal_names = []; 
+
+    for (ii = 0; ii < all_cals.length; ii++) {
+        fname = all_cals[ii].getName().split(" ")[0].split("@")[0];
+        lname = all_cals[ii].getName().split(" ")[1];
+        inst = new instructor(fname, lname);
+        cal_names.push(inst);
+    }
+
+    return cal_names; 
+}

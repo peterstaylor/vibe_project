@@ -11,7 +11,6 @@ function client_emails() {
     var active = active_range(roster); 
 
     var all_cals = CalendarApp.getAllCalendars(); 
-    var cal_names = []; 
 
     // removing unneeded calendars
     for (var ii = 0; ii < all_cals.length; ii++) {
@@ -19,15 +18,8 @@ function client_emails() {
             all_cals.splice(ii, 1); 
         }
     }
-    var fname; 
-    var lname;
-    var inst; 
-    for (ii = 0; ii < all_cals.length; ii++) {
-        fname = all_cals[ii].getName().split(" ")[0].split("@")[0]; 
-        lname = all_cals[ii].getName().split(" ")[1]; 
-        inst = new instructor(fname, lname); 
-        cal_names.push(inst); 
-    }
+
+    var cal_names = calendar_names(all_cals);     
 
     for (var i_count = 0; i_count < 1; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month); 
