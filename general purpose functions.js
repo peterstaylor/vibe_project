@@ -10,7 +10,7 @@ function column_find(roster, cal_names, i_count) {
     var last_column = roster.getLastColumn();
     var top_row = roster.getRange(1, 1, 1, last_column).getValues();
     for (ii = 0; ii < top_row.length && column == 0; ii++) {
-        if (cal_names[i_count].firstname == top_row[ii].split(" ")[0]) {
+        if (cal_names[i_count].firstname == top_row[0][ii].split(" ")[0]) {
             column = ii + 1;
         }
     }
@@ -30,4 +30,14 @@ function calendar_names(all_cals) {
     }
 
     return cal_names; 
+}
+
+function remove(all_cals) {
+    for (var ii = 0; ii < all_cals.length; ii++) {
+        if ((all_cals[ii].getName() == 'Admin') || (all_cals[ii].getName() == '-')) {
+            all_cals.splice(ii, 1);
+        }
+    }
+
+    return all_cals; 
 }
