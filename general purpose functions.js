@@ -8,9 +8,9 @@ function cleanup() {
 function column_find(roster, cal_names, i_count) {
     var column = 0;
     var last_column = roster.getLastColumn();
-    var top_row = roster.getRange(1, 1, 1, last_column).getValues();
+    var top_row = roster.getRange(1, 1, 1, last_column).getValues()[0];
     for (ii = 0; ii < top_row.length && column == 0; ii++) {
-        if (cal_names[i_count].firstname == top_row[0][ii].split(" ")[0]) {
+        if (cal_names[i_count].firstname == top_row[ii].split(" ")[0]) {
             column = ii + 1;
         }
     }

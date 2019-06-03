@@ -44,6 +44,7 @@ function top_level() {
             cal_names.push(empty_name);
         }
 
+
         // removing the unneeded calendars 
         for (var ii = 0; ii < num_cals; ii++) {
             if (cal_names[ii] == 'Admin') {
