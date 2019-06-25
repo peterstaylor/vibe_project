@@ -53,10 +53,10 @@ function client_emails() {
                 }
 
                 if (temp_email.length > 1) {
-                    temp_client = new Client(temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1]);
+                    temp_client = new Client(cal_names[i_count], temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1]);
                 }
                 else {
-                    temp_client = new Client(temp_ln, temp_fn, temp_guard, temp_email[0]);
+                    temp_client = new Client(cal_names[i_count], temp_ln, temp_fn, temp_guard, temp_email[0]);
                 }
                 // initialize these to zero so we can count later 
                 temp_client.thismonth = 0; 
@@ -64,8 +64,9 @@ function client_emails() {
                 all_clients.push(temp_client); 
             }
         }
-
+        Logger.log(all_clients); 
         // now with all clients and all lessons in our window collected we can begin 
+        var big_list = []; 
         for (ii = 0; ii < all_clients.length; ii++) {
 
             for (jj = 0; jj < lessons.length; jj++) {
@@ -98,4 +99,26 @@ function client_emails() {
             }
         }
     }
+    // here is where we push the list of all clients up to the next level 
+    // scan through the big list for a client name that matches
+    // if it matches we append to the end of the list itme
+    // if no matches, we push it ot the end of the big list 
+
+    // first pass big list is empty 
+    if (big_list.length == 0) {
+        for (ii = 0; ii < all_clients.length; ii++) {
+            temp_list = new List(all_clients[ii], null); 
+            big_list.push(temp_list); 
+        }
+    }
+
+
+    else {
+        for (ii = 0; ii < all_clients.length; ii++) {
+            for (jj = 0; jj < big_list.length; jj++) {
+
+            }
+        }
+    }
+    
 }
