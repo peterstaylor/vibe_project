@@ -30,5 +30,8 @@ function client_emails() {
 
         // returning the column that counts up the number of instructor lessons 
         var column = column_find(roster, cal_names, i_count); 
+
+        //collect all clients under this particular instructor 
+
     }
 }

@@ -20,3 +20,10 @@ function instructor(fname, lname) {
     this.firstname = fname; 
     this.lastname = lname; 
 }
+
+function Client(stud_ln, stud_fn, guardian, email) {
+    this.stud_ln = stud_ln; 
+    this.stud_fn = stud_fn; 
+    this.guardian = guardian; 
+    this.email = email; 
+}
