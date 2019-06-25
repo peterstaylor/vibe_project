@@ -58,9 +58,44 @@ function client_emails() {
                 else {
                     temp_client = new Client(temp_ln, temp_fn, temp_guard, temp_email[0]);
                 }
+                // initialize these to zero so we can count later 
+                temp_client.thismonth = 0; 
+                temp_client.nextmonth = 0; 
                 all_clients.push(temp_client); 
             }
         }
 
+        // now with all clients and all lessons in our window collected we can begin 
+        for (ii = 0; ii < all_clients.length; ii++) {
+
+            for (jj = 0; jj < lessons.length; jj++) {
+                title = lessons[jj].title.split(' ');
+                firstname = all_clients[ii].stud_fn.split(' ');
+                lastname = all_clients[ii].stud_ln.split(' ')[0];
+
+                // check for cancellation or free trial, neither get counted for billing
+                if (title[0] == 'CANCELED' || title[0] == 'CANCELLED' || title[0] == '[CANCELLED]' || title[0] == '(CANCELLED)' || title[0] == 'FREE') {
+                }
+
+                // check for cancellation or free trial, neither get counted for billing
+                else if (title[1] == 'CANCELED' || title[1] == 'CANCELLED' || title[1] == '[CANCELLED]' || title[1] == '(CANCELLED)' || title[1] == 'FREE') {
+                }
+
+                // again we are checking to see if there is a match between client info and calendar info
+                else {
+                    for (kk = 0; kk < title.length; kk++){
+                        if ((title[kk] == firstname[0] && title[kk + 1] == lastname) || (title[kk] == firstname[0] && title[kk + 1] == firstname[1])) {
+                            if (lessons[jj].date >= begin_next_month) {
+                                all_clients[ii].nextmonth = all_clients[ii].nextmonth + 1; 
+                            }
+                            else {
+                                all_clients[ii].thismonth = all_clients[ii].thismonth + 1; 
+                            }
+                            kk = title.length;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
