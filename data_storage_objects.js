@@ -21,9 +21,10 @@ function instructor(fname, lname) {
     this.lastname = lname; 
 }
 
-function Client(stud_ln, stud_fn, guardian, email) {
+function Client(stud_ln, stud_fn, guardian, email1, email2) {
     this.stud_ln = stud_ln; 
     this.stud_fn = stud_fn; 
     this.guardian = guardian; 
-    this.email = email; 
+    this.email1 = email1;
+    this.email2 = email2; 
 }

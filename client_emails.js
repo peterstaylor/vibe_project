@@ -32,6 +32,35 @@ function client_emails() {
         var column = column_find(roster, cal_names, i_count); 
 
         //collect all clients under this particular instructor 
+        roster_vals = roster.getRange(active[0], 1, active[1] - active[0], column).getValues(); 
+        all_clients = []; 
+
+        for (ii = 0; ii < roster_vals.length; ii++) {
+            if (roster_vals[ii][column - 1]) {
+                temp_ln = roster_vals[ii][0];
+                temp_fn = roster_vals[ii][1]; 
+                temp_guard = roster_vals[ii][2]; 
+                temp_email = roster_vals[ii][3].split(',');
+
+                // if email is blank, correct email is always stored a row or two up in the master roster
+                // scan upwards until you get a hit
+                if (temp_email[0] == "") {
+                    jj = 1; 
+                    while (temp_email[0] == "") {
+                        temp_email = roster_vals[ii - jj][3].split(','); 
+                        jj = jj + 1; 
+                    }
+                }
+
+                if (temp_email.length > 1) {
+                    temp_client = new Client(temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1]);
+                }
+                else {
+                    temp_client = new Client(temp_ln, temp_fn, temp_guard, temp_email[0]);
+                }
+                all_clients.push(temp_client); 
+            }
+        }
 
     }
 }
