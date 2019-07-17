@@ -14,7 +14,10 @@ function client_emails() {
     all_cals = remove(all_cals); 
 
     var cal_names = calendar_names(all_cals);     
+    var guardian_records = []; 
 
+    // this loops through all instructors to 
+    // result in the guard record array 
     for (var i_count = 0; i_count < 1; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month); 
         var lessons = []; 
@@ -64,7 +67,7 @@ function client_emails() {
                 all_clients.push(temp_client); 
             }
         }
-        Logger.log(all_clients); 
+        
         // now with all clients and all lessons in our window collected we can begin 
         var big_list = []; 
         for (ii = 0; ii < all_clients.length; ii++) {
@@ -99,26 +102,33 @@ function client_emails() {
             }
         }
     }
-    // here is where we push the list of all clients up to the next level 
-    // scan through the big list for a client name that matches
-    // if it matches we append to the end of the list itme
-    // if no matches, we push it ot the end of the big list 
 
-    // first pass big list is empty 
-    if (big_list.length == 0) {
-        for (ii = 0; ii < all_clients.length; ii++) {
-            temp_list = new List(all_clients[ii], null); 
-            big_list.push(temp_list); 
+    // all client information for all instructors is in all_clients now
+    // each guardian can have multiple client entries, client entries are per instructor 
+    for (ii = 0; ii < 1; ii++) {
+        if (guardian_records.length == 0) {
+            var tmp = new Guardian_Record(all_clients[ii].guardian, all_clients[ii].email1, [all_clients[ii]]);
+            guardian_records.push(tmp); 
+            Logger.log(guardian_records); 
         }
-    }
-
-
-    else {
-        for (ii = 0; ii < all_clients.length; ii++) {
-            for (jj = 0; jj < big_list.length; jj++) {
-
+        else {
+            for (jj = 0; jj < guardian_records.length; jj++) {
+                // looking in the existing guardian records for a match
+                yes = 0; 
+                if (guardian_records[jj].name == all_clients[ii].guardian) {
+                    guardian_records[jj].client_records.push(all_clients[ii]); 
+                    jj = guardian_records.length; 
+                    yes = 1; 
+                }
+            }
+            if (yes == 0) {
+                var tmp = new Guardian_Record(all_clients[ii].guardian, all_clients[ii].email1, [all_clients[ii]]);
+                guardian_records.push(tmp);
             }
         }
     }
-    
+
+    for (ii = 0; ii < guardian_records.length; ii++) {
+        Logger.log(guardian_records[ii].name); 
+    }
 }

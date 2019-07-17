@@ -32,7 +32,8 @@ function Client(inst, stud_ln, stud_fn, guardian, email1, email2, thismonth, nex
     this.nextmonth = nextmonth; 
 }
 
-function List(content, next) {
-    this.content = content; 
-    this.next = next; 
+function Guardian_Record(name, email, client_records) {
+    this.name = name; 
+    this.email = email; 
+    this.client_records = client_records; 
 }
