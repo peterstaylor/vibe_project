@@ -105,11 +105,11 @@ function client_emails() {
 
     // all client information for all instructors is in all_clients now
     // each guardian can have multiple client entries, client entries are per instructor 
-    for (ii = 0; ii < 1; ii++) {
+    for (ii = 0; ii < all_clients.length; ii++) {
         if (guardian_records.length == 0) {
             var tmp = new Guardian_Record(all_clients[ii].guardian, all_clients[ii].email1, [all_clients[ii]]);
             guardian_records.push(tmp); 
-            Logger.log(guardian_records); 
+           
         }
         else {
             for (jj = 0; jj < guardian_records.length; jj++) {
@@ -126,9 +126,5 @@ function client_emails() {
                 guardian_records.push(tmp);
             }
         }
-    }
-
-    for (ii = 0; ii < guardian_records.length; ii++) {
-        Logger.log(guardian_records[ii].name); 
     }
 }

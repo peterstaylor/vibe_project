@@ -10,7 +10,7 @@ function column_find(roster, cal_names, i_count) {
     var last_column = roster.getLastColumn();
     var top_row = roster.getRange(1, 1, 1, last_column).getValues()[0];
     for (ii = 0; ii < top_row.length && column == 0; ii++) {
-        if (cal_names[i_count].firstname == top_row[ii].split(" ")[0]) {
+        if (cal_names[i_count].firstname.toLowerCase() == top_row[ii].split(" ")[0].toLowerCase()) {
             column = ii + 1;
         }
     }
