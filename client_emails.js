@@ -18,7 +18,8 @@ function client_emails() {
 
     // this loops through all instructors to 
     // result in the guard record array 
-    for (var i_count = 0; i_count < 1; i_count++) {
+    all_clients = [];
+    for (var i_count = 0; i_count < all_cals.length; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month); 
         var lessons = []; 
 
@@ -36,7 +37,7 @@ function client_emails() {
 
         //collect all clients under this particular instructor 
         roster_vals = roster.getRange(active[0], 1, active[1] - active[0], column).getValues(); 
-        all_clients = []; 
+         
 
         for (ii = 0; ii < roster_vals.length; ii++) {
             if (roster_vals[ii][column - 1]) {
@@ -115,7 +116,7 @@ function client_emails() {
             for (jj = 0; jj < guardian_records.length; jj++) {
                 // looking in the existing guardian records for a match
                 yes = 0; 
-                if (guardian_records[jj].name == all_clients[ii].guardian) {
+                if (guardian_records[jj].email == all_clients[ii].email1) {
                     guardian_records[jj].client_records.push(all_clients[ii]); 
                     jj = guardian_records.length; 
                     yes = 1; 
