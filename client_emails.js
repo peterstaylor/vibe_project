@@ -70,7 +70,6 @@ function client_emails() {
         }
         
         // now with all clients and all lessons in our window collected we can begin 
-        var big_list = []; 
         for (ii = 0; ii < all_clients.length; ii++) {
 
             for (jj = 0; jj < lessons.length; jj++) {
@@ -127,5 +126,48 @@ function client_emails() {
                 guardian_records.push(tmp);
             }
         }
+    }
+
+    // this section will create the emails and forms 
+    newline = "<br></br>"; 
+    for (ii = 0; ii < 1; ii++) {
+        var message = "<p>"; 
+        message = message + "Dear " + guardian_records[ii].name + ","
+        message = message + newline;  
+        message = message + "<br>This is some placeholder text for John to help me write.</br>"
+        for (jj = 0; jj < guardian_records[ii].client_records.length; jj++) {
+            message = message + "<br>---</br>"; 
+            message = message + newline; 
+            message = message + "<br>Student Name: " + guardian_records[ii].client_records[jj].stud_fn + " " + guardian_records[ii].client_records[jj].stud_ln + "</br>"; 
+            message = message + newline; 
+            message = message + "<br>Instructor: " + guardian_records[ii].client_records[jj].inst.firstname + " " + guardian_records[ii].client_records[jj].inst.lastname + "</br>"; 
+            message = message + newline; 
+            message = message + "<br>" + guardian_records[ii].client_records[jj].stud_fn; 
+            message = message + " had " + guardian_records[ii].client_records[jj].thismonth; 
+            message = message + " lessons this month and has " + guardian_records[ii].client_records[jj].nextmonth; 
+            message = message + " lessons scheduled next month.</br>"; 
+            message = message + "<br>If there are any issues with this, please click the link below"; 
+            message = message + " to fill out a form that will result in your instructor contacting you"; 
+            message = message + " in order to rectify the situation.</br>"; 
+            // todo: this link will be to the actual form eventually 
+            message = message + "<br><a href ='www.google.com'>Link to click.</a></br>"; 
+        }
+        message = message + "<br>---</br>";
+        message = message + "<br>Thank you very much for your assistance in maintaining an "; 
+        message = message + "accurate account of lessons for billing purposes.</br>"; 
+        message = message + "<br>Please respond to this email if you have any questions.</br>"; 
+        message = message + newline; 
+        message = message + "<br>Closer closer closer closer, can put whatever text you want here.</br>"; 
+        message = message + "</p>"; 
+
+        // todo: add functionality so this can be rolled out to only certain clients 
+        //email_dest = guardian_records[ii].email;  
+        email_dest = "peters.taylor@gmail.com"; 
+        headline = "Your Monthly Lesson Report From Vibe Music Academy"; 
+        MailApp.sendEmail({
+            to:email_dest,
+            subject: headline,
+            htmlBody: message,
+        });
     }
 }
