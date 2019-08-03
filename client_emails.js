@@ -141,20 +141,37 @@ function client_emails() {
         for (jj = 0; jj < guardian_records[ii].client_records.length; jj++) {
             var formtitle = guardian_records[ii].client_records[jj].stud_fn;
             formtitle = formtitle + " " + guardian_records[ii].client_records[jj].stud_ln;
-            formtitle = formtitle + " Issue Report Form";
-            formdesc = "Instructor: " + guardian_records[ii].client_records[jj].inst.firstname;
-            formdesc = formdesc + " " + guardian_records[ii].client_records[jj].inst.lastname;
-            var form = FormApp.create(formtitle);
-            form.setDescription(formdesc);
-            form.setRequireLogin(false);
+            formtitle = formtitle + " Instructor Contact Form";
+            var existing = DriveApp.getFilesByName(formtitle);
+            var neednew = true;
+            while(existing.hasNext()){
+                var file = existing.next();
+                var tmpform = FormApp.openById(file.getId());
+                var tmpdesc = tmpform.getDescription().split(" ");
+                b1 = tmpdesc[1] == guardian_records[ii].client_records[jj].inst.firstname;
+                b2 = tmpdesc[2] == guardian_records[ii].client_records[jj].inst.lastname;
+                if(b1 && b2){
+                  var form = tmpform;
+                  neednew = false;
+                  break;
+                }
+            }
+            if (neednew == true){
+              formdesc = "Instructor: " + guardian_records[ii].client_records[jj].inst.firstname;
+              formdesc = formdesc + " " + guardian_records[ii].client_records[jj].inst.lastname;
+              var form = FormApp.create(formtitle);
+              form.setDescription(formdesc);
+              form.setRequireLogin(false);
+              var url = form.getPublishedUrl();
+              var item = form.addMultipleChoiceItem();
+              item.setTitle("Would you like to report an issue with the lesson tally this month? If you select 'yes' your instructor will be notified to contact you.")
+                  .setChoices([
+                  item.createChoice('Yes'),
+                  item.createChoice('No')
+                  ])
+                  .showOtherOption(false);
+            }
             var url = form.getPublishedUrl();
-            var item = form.addMultipleChoiceItem();
-            item.setTitle("Would you like to report an issue with the lesson tally this month? If you select 'yes' your instructor will be notified to contact you.")
-                .setChoices([
-                item.createChoice('Yes'),
-                item.createChoice('No')
-                ])
-                .showOtherOption(false);
             message = message + "<br>---</br>";
             message = message + newline;
             message = message + "<br>Student Name: " + guardian_records[ii].client_records[jj].stud_fn + " " + guardian_records[ii].client_records[jj].stud_ln + "</br>";
