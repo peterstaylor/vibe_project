@@ -2,6 +2,7 @@ function notify_instructors(){
   var all = DriveApp.getFiles();
   var contact_forms = [];
 
+// collecting all instructor contact forms
   while(all.hasNext()){
     var tmp = all.next();
     var name = tmp.getName().split(" ");
@@ -14,5 +15,25 @@ function notify_instructors(){
       contact_forms.push(tmp);
     }
   }
+
+  for(ii = 0; ii<contact_forms.length; ii++){
+    var id = contact_forms[ii].getId();
+    var form = FormApp.openById(id);
+    var start = new Date();
+    start.setHours(0,0,0,0);
+    var responses = form.getResponses(start);
+
+    // this is the condition that we check to see if we need to send a message
+    if (responses.length > 0){
+      var resplen = responses.length;
+      var answer = responses[resplen-1].getItemResponses()[0].getResponse();
+      // if this is true we know to notify the instructor
+      if (answer == "Yes"){
+
+      }
+    }
+
+  }
+
   debug;
 }
