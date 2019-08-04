@@ -31,7 +31,7 @@ function notify_instructors(){
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
         if(opened == false){
-          //todo open spreadsheet and grab instructor 
+          //todo open spreadsheet and grab instructor email address
         }
         else{
 
