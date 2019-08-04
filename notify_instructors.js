@@ -15,7 +15,8 @@ function notify_instructors(){
       contact_forms.push(tmp);
     }
   }
-
+  // boolean re: if the instructor database has been opened
+  var opened = false;
   for(ii = 0; ii<contact_forms.length; ii++){
     var id = contact_forms[ii].getId();
     var form = FormApp.openById(id);
@@ -29,7 +30,12 @@ function notify_instructors(){
       var answer = responses[resplen-1].getItemResponses()[0].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
+        if(opened == false){
+          //todo open spreadsheet and grab instructor 
+        }
+        else{
 
+        }
       }
     }
 

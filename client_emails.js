@@ -157,6 +157,7 @@ function client_emails() {
                 }
             }
             if (neednew == true){
+              // to do: add more detail into form itself so it's easier to grab info later
               formdesc = "Instructor: " + guardian_records[ii].client_records[jj].inst.firstname;
               formdesc = formdesc + " " + guardian_records[ii].client_records[jj].inst.lastname;
               var form = FormApp.create(formtitle);
