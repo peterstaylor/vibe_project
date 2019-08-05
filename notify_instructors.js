@@ -33,13 +33,24 @@ function notify_instructors(){
         if(opened == false){
           //todo open spreadsheet and grab instructor email address
         }
-        else{
+        var studentNameArray = contact_forms[ii].getName().split(" ");
+        debug;
+        var description = form.getDescription().split("\n");
+        var instFN = description[0].split(" ")[1];
+        var instLN = description[0].split(" ")[2];
+        var client = description[1].split(":")[1].substring(1);
 
+        for(nn = 0; nn<studentNameArray.length; nn++){
+          if(studentNameArray[nn] == "Instructor")
+            break;
+        }
+        var studentName = "";
+        for(mm = 0; mm < nn; mm++){
+          studentName = studentName + studentNameArray[mm] + " "
         }
       }
     }
 
   }
 
-  debug;
 }
