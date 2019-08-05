@@ -161,7 +161,7 @@ function client_emails() {
               formdesc = "Instructor: " + guardian_records[ii].client_records[jj].inst.firstname;
               formdesc = formdesc + " " + guardian_records[ii].client_records[jj].inst.lastname;
               formdesc = formdesc + "\n";
-              formdesc = formdesc + "Client: " + guardian_records[ii]; 
+              formdesc = formdesc + "Client: " + guardian_records[ii].name;
               var form = FormApp.create(formtitle);
               form.setDescription(formdesc);
               form.setRequireLogin(false);
