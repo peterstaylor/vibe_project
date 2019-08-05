@@ -160,6 +160,8 @@ function client_emails() {
               // to do: add more detail into form itself so it's easier to grab info later
               formdesc = "Instructor: " + guardian_records[ii].client_records[jj].inst.firstname;
               formdesc = formdesc + " " + guardian_records[ii].client_records[jj].inst.lastname;
+              formdesc = formdesc + "\n";
+              formdesc = formdesc + "Client: " + guardian_records[ii]; 
               var form = FormApp.create(formtitle);
               form.setDescription(formdesc);
               form.setRequireLogin(false);
