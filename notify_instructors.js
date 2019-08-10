@@ -43,7 +43,7 @@ function notify_instructors(){
         var instLN = description[0].split(" ")[2];
 
         // grabbing the instructor's email
-        // after this loop aa contains the instructor row 
+        // after this loop aa contains the instructor row
         for (aa = 2; aa <range.length; aa++){
           var nameColumn = range[aa][0].split(",");
           var scannedLN = nameColumn[0];
@@ -64,6 +64,14 @@ function notify_instructors(){
         for(mm = 0; mm < nn; mm++){
           studentName = studentName + studentNameArray[mm] + " "
         }
+        //from here just need to format the string
+        // then send the email
+        // then somehow get it to register and save that the message was sent
+        var subject = client + " has requested you to contact them";
+        var message = "<br>Hello " + instFN + ",</br>";
+        message = message + "<br>Your client " + client + " has logged a request for you to ";
+        message = message + "contact them regarding " + studentName + "'s recent lessons.</br>";
+        message = message + "<br>Please contact them at your earliest convenience to sort out any issues.</br>"
       }
     }
 
