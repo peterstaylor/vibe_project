@@ -30,14 +30,30 @@ function notify_instructors(){
       var answer = responses[resplen-1].getItemResponses()[0].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
+        var instEmail = "unset";
         if(opened == false){
           //todo open spreadsheet and grab instructor email address
+          var instSS = SpreadsheetApp.openById("1zDeEDDzH7i7SLFz4YBZe6xRYOZXC0e7Ge3nbYgX0Ew4").getSheets()[0];
+          var range = instSS.getDataRange().getValues();
+          opened = true;
         }
         var studentNameArray = contact_forms[ii].getName().split(" ");
-        debug;
         var description = form.getDescription().split("\n");
         var instFN = description[0].split(" ")[1];
         var instLN = description[0].split(" ")[2];
+
+        // grabbing the instructor's email
+        // after this loop aa contains the instructor row 
+        for (aa = 2; aa <range.length; aa++){
+          var nameColumn = range[aa][0].split(",");
+          var scannedLN = nameColumn[0];
+          var scannedFN = nameColumn[1].trim();
+          if (scannedLN == instLN && scannedFN == instFN){
+            instEmail = nameColumn[aa][4];
+            break;
+          }
+        }
+
         var client = description[1].split(":")[1].substring(1);
 
         for(nn = 0; nn<studentNameArray.length; nn++){
