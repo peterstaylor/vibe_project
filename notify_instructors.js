@@ -17,11 +17,11 @@ function notify_instructors(){
   }
   // boolean re: if the instructor database has been opened
   var opened = false;
-  var alreadSent = false;
+  var alreadySent = false;
   var logSS = SpreadsheetApp.openById("1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI").getSheets()[1];
   var logRange = logSS.getDataRange().getValues();
 
- // new code to check for old data in the email out log 
+ // new code to check for old data in the email out log
   if (logRange.length > 1){
     var checkTime = new Date();
     checkTime.setDate(checkTime.getDate() -1);
@@ -45,6 +45,7 @@ function notify_instructors(){
       var answer = responses[resplen-1].getItemResponses()[0].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
+        // to do: add error handling so if instructor email is unset we get a notification 
         var instEmail = "unset";
         if(opened == false){
           //todo open spreadsheet and grab instructor email address
