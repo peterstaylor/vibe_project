@@ -45,7 +45,7 @@ function notify_instructors(){
       var answer = responses[resplen-1].getItemResponses()[0].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
-        // to do: add error handling so if instructor email is unset we get a notification 
+        // to do: add error handling so if instructor email is unset we get a notification
         var instEmail = "unset";
         if(opened == false){
           //todo open spreadsheet and grab instructor email address
@@ -87,19 +87,34 @@ function notify_instructors(){
           studentName = studentName + studentNameArray[mm] + " "
         }
         studentName = studentName.substring(0, studentName.length -1)
-        // then somehow get it to register and save that the message was sent
-        var headline = client + " has requested you to contact them";
-        var message = "<br>Hello " + instFN + ",</br>";
-        message = message + "<br>Your client " + client + " has logged a request for you to ";
-        message = message + "contact them regarding " + studentName + "'s recent lessons.</br>";
-        message = message + "<br>Please contact them at your earliest convenience to sort out any issues.</br>"
-        instEmail = "peters.taylor@gmail.com"
-        MailApp.sendEmail({
-          to: instEmail,
-          subject: headline,
-          htmlBody: message,
-        })
+
+        // check the spreadsheet for matches in the last 24 hours of sends
+        for (var zz = 0; zz <logRange.length; zz++){
+          if(logRange[zz][1] == studentName && logRange[zz][2] == client && logRange[zz][3] == instLN && logRange[zz][4] == instFN){
+            alreadSent = true;
+            break;
+          }
+        }
+
+        if (alreadySent == false){
+          var headline = client + " has requested you to contact them";
+          var message = "<br>Hello " + instFN + ",</br>";
+          message = message + "<br>Your client " + client + " has logged a request for you to ";
+          message = message + "contact them regarding " + studentName + "'s recent lessons.</br>";
+          message = message + "<br>Please contact them at your earliest convenience to sort out any issues.</br>"
+          instEmail = "peters.taylor@gmail.com"
+          MailApp.sendEmail({
+            to: instEmail,
+            subject: headline,
+            htmlBody: message,
+          })
+          //todo : add code here to print emailed info to log spreadsheet
+          var now = new Date();
+          var newRow = [now, studentName, client, instLN, instFN];
+          logRange.push(newRow);
+        }
       }
     }
   }
+  logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
 }
