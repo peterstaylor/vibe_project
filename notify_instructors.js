@@ -46,10 +46,16 @@ function notify_instructors(){
         // after this loop aa contains the instructor row
         for (aa = 2; aa <range.length; aa++){
           var nameColumn = range[aa][0].split(",");
-          var scannedLN = nameColumn[0];
-          var scannedFN = nameColumn[1].trim();
+          if (nameColumn.length > 1){
+            var scannedLN = nameColumn[0];
+            var scannedFN = nameColumn[1].trim();
+          }
+          else{
+            var scannedLN = "dummy"
+            var scannedFN = "other dummy"
+          }
           if (scannedLN == instLN && scannedFN == instFN){
-            instEmail = nameColumn[aa][4];
+            instEmail = range[aa][4];
             break;
           }
         }
@@ -64,17 +70,22 @@ function notify_instructors(){
         for(mm = 0; mm < nn; mm++){
           studentName = studentName + studentNameArray[mm] + " "
         }
+        studentName = studentName.substring(0, studentName.length -1)
         //from here just need to format the string
         // then send the email
         // then somehow get it to register and save that the message was sent
-        var subject = client + " has requested you to contact them";
+        var headline = client + " has requested you to contact them";
         var message = "<br>Hello " + instFN + ",</br>";
         message = message + "<br>Your client " + client + " has logged a request for you to ";
         message = message + "contact them regarding " + studentName + "'s recent lessons.</br>";
         message = message + "<br>Please contact them at your earliest convenience to sort out any issues.</br>"
+        instEmail = "peters.taylor@gmail.com"
+        MailApp.sendEmail({
+          to: instEmail,
+          subject: headline,
+          htmlBody: message,
+        })
       }
     }
-
   }
-
 }
