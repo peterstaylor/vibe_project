@@ -17,6 +17,9 @@ function notify_instructors(){
   }
   // boolean re: if the instructor database has been opened
   var opened = false;
+  var alreadSent = false;
+  var logSS = SpreadsheetApp.openById("1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI").getSheets()[1];
+  var logRange = logSS.getDataRange().getValues(); 
   for(ii = 0; ii<contact_forms.length; ii++){
     var id = contact_forms[ii].getId();
     var form = FormApp.openById(id);
@@ -71,8 +74,6 @@ function notify_instructors(){
           studentName = studentName + studentNameArray[mm] + " "
         }
         studentName = studentName.substring(0, studentName.length -1)
-        //from here just need to format the string
-        // then send the email
         // then somehow get it to register and save that the message was sent
         var headline = client + " has requested you to contact them";
         var message = "<br>Hello " + instFN + ",</br>";
