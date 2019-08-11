@@ -33,6 +33,7 @@ function notify_instructors(){
     }
   }
   for(ii = 0; ii<contact_forms.length; ii++){
+    var alreadySent = false;
     var id = contact_forms[ii].getId();
     var form = FormApp.openById(id);
     var start = new Date();
@@ -91,7 +92,7 @@ function notify_instructors(){
         // check the spreadsheet for matches in the last 24 hours of sends
         for (var zz = 0; zz <logRange.length; zz++){
           if(logRange[zz][1] == studentName && logRange[zz][2] == client && logRange[zz][3] == instLN && logRange[zz][4] == instFN){
-            alreadSent = true;
+            alreadySent = true;
             break;
           }
         }
