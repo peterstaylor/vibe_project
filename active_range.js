@@ -1,5 +1,8 @@
+// NOTE: don't forget that this script exists in two places
+// so that it can manage the active range for the email gui sheet too 
+
 function active_range(roster) {
-    var output = []; 
+    var output = [];
 
     var lr = roster.getLastRow();
     var m = 0;
@@ -7,14 +10,14 @@ function active_range(roster) {
     var barrier = "#00ff00";
     for (var j = 0; j < colors.length && m < 2; j++) {
         if (colors[j] == barrier && m == 0) {
-            output.push(j + 2); 
+            output.push(j + 2);
             m = m + 1;
         }
         else if (colors[j] == barrier && m == 1) {
-            output.push(j); 
+            output.push(j);
             m = m + 1;
         }
-    } 
+    }
 
-    return output;  
+    return output;
 }
