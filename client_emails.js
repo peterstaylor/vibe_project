@@ -9,9 +9,16 @@ function client_emails() {
 
     var gui = SpreadsheetApp.openById('1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI').getSheets()[0];
     var rollout = gui.getRange(7, 1, 1,1).getValue();
+    var testRolloutBool = false;
 
     if (rollout == "No"){
       var rolloutBool = false
+      var test = gui.getRange(10,1,1,1).getValue();
+      if(test == "Yes"){
+        testRolloutBool = true;
+        var testEmail = gui.getRange(13,1,1,1).getValue();
+        var testCount = gui.getRange(16,1,1,1).getValue();
+      }
     }
     else{
       var rolloutBool = true
@@ -144,7 +151,8 @@ function client_emails() {
 
     // this section will create the emails and forms
     newline = "<br></br>";
-    for (ii = 0; ii < 1; ii++) {
+    // will eventually loop through all of guardian records
+    for (ii = 0; ii < guardian_records.length; ii++) {
         // create the form first
         var message = "<p>";
         message = message + "Dear " + guardian_records[ii].name + ","
