@@ -1,4 +1,4 @@
-// current version is attached to client emails gui spreadsheet 
+// current version is attached to client emails gui spreadsheet
 
 function client_emails() {
     var dates = date_management();
@@ -17,7 +17,6 @@ function client_emails() {
       var rolloutBool = true
     }
 
-    debug;
 
     var rosters = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA');
     var roster = rosters.getSheets()[1];
@@ -145,7 +144,6 @@ function client_emails() {
 
     // this section will create the emails and forms
     newline = "<br></br>";
-    // will eventually loop through all of guardian records
     for (ii = 0; ii < 1; ii++) {
         // create the form first
         var message = "<p>";
