@@ -1,10 +1,12 @@
+// this exists for both client emails and calendar data interp spreadsheet 
+
 function date_management() {
         // get current date
         var now = new Date();
         var month = now.getMonth();
         var year = now.getFullYear();
 
-        // formatting date information 
+        // formatting date information
         // december
         if (month == 11) {
             var begin_this_month = new Date(year, month, 1, 0, 0, 0, 0);
@@ -19,7 +21,7 @@ function date_management() {
             var begin_this_month = new Date(year, month, 1, 0, 0, 0, 0);
             var begin_next_month = new Date(year, month + 1, 1, 0, 0, 0, 0);
 
-            // january 
+            // january
             if (month == 0) {
                 var begin_prev_month = new Date(year - 1, 11, 1, 0, 0, 0, 0);
                 var end_prev_month = new Date(year - 1, 11, 31, 23, 59, 59, 999);
@@ -80,5 +82,5 @@ function date_management() {
             }
 
         }
-        return [begin_prev_month, end_prev_month, begin_this_month, end_this_month, begin_next_month, end_next_month]; 
+        return [begin_prev_month, end_prev_month, begin_this_month, end_this_month, begin_next_month, end_next_month];
     }
