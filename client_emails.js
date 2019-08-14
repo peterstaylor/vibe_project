@@ -1,9 +1,23 @@
+// current version is attached to client emails gui spreadsheet 
+
 function client_emails() {
     var dates = date_management();
     var begin_this_month = dates[2];
     var end_this_month = dates[3];
     var begin_next_month = dates[4];
     var end_next_month = dates[5];
+
+    var gui = SpreadsheetApp.openById('1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI').getSheets()[0];
+    var rollout = gui.getRange(7, 1, 1,1).getValue();
+
+    if (rollout == "No"){
+      var rolloutBool = false
+    }
+    else{
+      var rolloutBool = true
+    }
+
+    debug;
 
     var rosters = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA');
     var roster = rosters.getSheets()[1];
