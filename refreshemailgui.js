@@ -1,5 +1,5 @@
 // NOTE: this code had to be saved with teh email gui spreadsheet
-// so it would be accessible to the script button 
+// so it would be accessible to the script button
 
 function refreshEmailGui(){
   var rosters = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA');
@@ -12,20 +12,20 @@ function refreshEmailGui(){
   var outputs = [];
   for(ii = start; ii <end; ii++){
     var skip = false;
-    var line = data[ii][2] + " " + data[ii][0]
+    var line = [data[ii][2], data[ii][0]];
     for(jj = 0; jj<outputs.length; jj++){
-      if (outputs[jj] == line || data[ii][0] == "" || data[ii][0] == "BUSINESS PARTNERSHIPS"){
+      if (((outputs[jj][0] == line[0]) && (outputs[jj][1] == line[1])) || data[ii][0] == "" || data[ii][0] == "BUSINESS PARTNERSHIPS"){
         skip = true;
         break;
       }
     }
     if (skip == false){
-      outputs.push([line]);
+      outputs.push(line);
     }
   }
 
   var gui = SpreadsheetApp.openById('1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI').getSheets()[0];
   var lastRow = gui.getDataRange().getLastRow();
-  gui.getRange(2, 3, lastRow, 1).clearContent();
-  gui.getRange(2, 3, outputs.length, 1).setValues(outputs);
+  gui.getRange(2, 3, lastRow, 2).clearContent();
+  gui.getRange(2, 3, outputs.length, 2).setValues(outputs);
 }
