@@ -13,6 +13,9 @@ function client_emails() {
 
     if (rollout == "No"){
       var rolloutBool = false
+      var testStableLR = gui.getRange(2,6).getLastRow();
+      var testStable = gui.getRange(2,6,testStableLR-1, 2).getValues();
+      debug; 
       var test = gui.getRange(10,1,1,1).getValue();
       if(test == "Yes"){
         testRolloutBool = true;
@@ -23,6 +26,16 @@ function client_emails() {
     else{
       var rolloutBool = true
     }
+
+    // testing booleans to see how final loop should run
+    if (testRolloutBool && !rolloutBool){
+      var loopLength = testCount;
+      var email_dest = testEmail;
+    }
+    else {
+      var loopLength = guardian_records.length
+    }
+
 
 
     var rosters = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA');
@@ -149,17 +162,11 @@ function client_emails() {
     }
 
 
+
+
+
     // this section will create the emails and forms
     newline = "<br></br>";
-
-    // testing booleans to see how final loop should run 
-    if (testRolloutBool && !rolloutBool){
-      var loopLength = testCount;
-      var email_dest = testEmail;
-    }
-    else {
-      var loopLength = guardian_records.length
-    }
 
     for (ii = 0; ii < loopLength; ii++) {
         // create the form first
