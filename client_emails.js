@@ -187,7 +187,7 @@ function client_emails() {
         }
       }
 
-
+      if(match || rolloutBool){
         var message = "<p>";
         message = message + "Dear " + guardian_records[ii].name + ","
         message = message + newline;
@@ -266,5 +266,8 @@ function client_emails() {
             subject: headline,
             htmlBody: message,
         });
+      }
+
+
     }
 }
