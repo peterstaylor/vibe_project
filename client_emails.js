@@ -153,12 +153,14 @@ function client_emails() {
     newline = "<br></br>";
     // will eventually loop through all of guardian records
 
-    if (testRolloutBool){
+    if (testRolloutBool && !rolloutBool){
       var loopLength = testCount;
+      var email_dest = testEmail;
     }
     else {
       var loopLength = guardian_records.length
     }
+
     for (ii = 0; ii < loopLength; ii++) {
         // create the form first
         var message = "<p>";
@@ -227,8 +229,10 @@ function client_emails() {
         message = message + "</p>";
 
         // todo: add functionality so this can be rolled out to only certain clients
-        //email_dest = guardian_records[ii].email;
-        email_dest = "peters.taylor@gmail.com";
+        if(!testRolloutBool && rolloutBool){
+          email_dest = guardian_records[ii].email;
+        }
+        
         headline = "Your Monthly Lesson Report From Vibe Music Academy";
         MailApp.sendEmail({
             to:email_dest,
