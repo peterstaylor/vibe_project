@@ -152,7 +152,14 @@ function client_emails() {
     // this section will create the emails and forms
     newline = "<br></br>";
     // will eventually loop through all of guardian records
-    for (ii = 0; ii < guardian_records.length; ii++) {
+
+    if (testRolloutBool){
+      var loopLength = testCount;
+    }
+    else {
+      var loopLength = guardian_records.length
+    }
+    for (ii = 0; ii < loopLength; ii++) {
         // create the form first
         var message = "<p>";
         message = message + "Dear " + guardian_records[ii].name + ","
