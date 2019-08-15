@@ -151,8 +151,8 @@ function client_emails() {
 
     // this section will create the emails and forms
     newline = "<br></br>";
-    // will eventually loop through all of guardian records
 
+    // testing booleans to see how final loop should run 
     if (testRolloutBool && !rolloutBool){
       var loopLength = testCount;
       var email_dest = testEmail;
@@ -232,7 +232,7 @@ function client_emails() {
         if(!testRolloutBool && rolloutBool){
           email_dest = guardian_records[ii].email;
         }
-        
+
         headline = "Your Monthly Lesson Report From Vibe Music Academy";
         MailApp.sendEmail({
             to:email_dest,
