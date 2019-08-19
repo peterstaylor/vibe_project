@@ -16,7 +16,6 @@ function client_emails() {
       var Avals = gui.getRange("F2:F").getValues();
       var Alast = Avals.filter(String).length;
       var testStable = gui.getRange(2,6,Alast, 2).getValues();
-      debug;
       var test = gui.getRange(10,1,1,1).getValue();
       if(test == "Yes"){
         testRolloutBool = true;
@@ -34,10 +33,8 @@ function client_emails() {
       var email_dest = testEmail;
     }
     else {
-      var loopLength = guardian_records.length
+      var loopLength = guardian_records.length;
     }
-
-
 
     var rosters = SpreadsheetApp.openById('1_GwAU5cVNQEki7dH-jCqNiqy_bhAlQeH_yBOFCdg7TA');
     var roster = rosters.getSheets()[1];
@@ -162,18 +159,15 @@ function client_emails() {
         }
     }
 
-
-
-
-
     // this section will create the emails and forms
-    newline = "<br></br>";
+    var newline = "<br></br>";
     //todo: loop thru test stable and copmare it to guardian records to determine email sending
     for (ii = 0; ii < loopLength; ii++) {
 
+      // if we are not rolling out to all clients, check the test stable
       if(!rolloutBool){
         for(aa = 0; aa < testStable.length; aa++){
-          b1 = testStable[aa][0] == guardian_records[ii].name;
+          b1 = (testStable[aa][0] == guardian_records[ii].name);
           for(bb = 0; bb < guardian_records[ii].length; bb++){
             if(testStable[aa][1] == guardian_records[ii].client_records[bb].stud_ln){
               b2 = true;
