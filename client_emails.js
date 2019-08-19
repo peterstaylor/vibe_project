@@ -168,6 +168,7 @@ function client_emails() {
       if(!rolloutBool){
         for(aa = 0; aa < testStable.length; aa++){
           b1 = (testStable[aa][0] == guardian_records[ii].name);
+          b2 = false; 
           for(bb = 0; bb < guardian_records[ii].length; bb++){
             if(testStable[aa][1] == guardian_records[ii].client_records[bb].stud_ln){
               b2 = true;
