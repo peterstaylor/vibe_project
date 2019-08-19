@@ -167,11 +167,14 @@ function client_emails() {
       // if we are not rolling out to all clients, check the test stable
       if(!rolloutBool){
         for(aa = 0; aa < testStable.length; aa++){
+          var name = guardian_records[ii].name;
           b1 = (testStable[aa][0] == guardian_records[ii].name);
-          b2 = false; 
-          for(bb = 0; bb < guardian_records[ii].length; bb++){
-            if(testStable[aa][1] == guardian_records[ii].client_records[bb].stud_ln){
-              b2 = true;
+          b2 = false;
+          for(bb = 0; bb < guardian_records[ii].client_records.length; bb++){
+            var grlname = guardian_records[ii].client_records[bb].stud_ln;
+            var tslname = testStable[aa][1];
+            var b2 = (tslname == grlname);
+            if(b2){
               break;
             }
           }
@@ -255,7 +258,7 @@ function client_emails() {
           //email_dest = guardian_records[ii].email;
         }
 
-        headline = "Your Monthly Lesson Report From Vibe Music Academy";
+        var headline = "Your Monthly Lesson Report From Vibe Music Academy";
         MailApp.sendEmail({
             to:email_dest,
             subject: headline,
