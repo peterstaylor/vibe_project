@@ -191,6 +191,7 @@ function client_emails() {
         message = message + newline;
         message = message + "<br>This is some placeholder text for John to help me write.</br>"
         for (jj = 0; jj < guardian_records[ii].client_records.length; jj++) {
+            if (!(guardian_records[ii].client_records[jj].thismonth == 0 && guardian_records[ii].client_records[jj].nextmonth == 0)){
             var formtitle = guardian_records[ii].client_records[jj].stud_fn;
             formtitle = formtitle + " " + guardian_records[ii].client_records[jj].stud_ln;
             formtitle = formtitle + " Instructor Contact Form";
@@ -242,6 +243,7 @@ function client_emails() {
             message = message + " in order to rectify the situation.</br>";
             // todo: this link will be to the actual form eventually
             message = message + "<br><a href ='" + url + "'>Link to click.</a></br>";
+          }
         }
         message = message + "<br>---</br>";
         message = message + "<br>Thank you very much for your assistance in maintaining an ";
