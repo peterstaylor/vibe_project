@@ -50,7 +50,8 @@ function client_emails() {
     // this loops through all instructors to
     // result in the guard record array
     all_clients = [];
-    for (var i_count = 0; i_count < all_cals.length; i_count++) {
+
+/*    for (var i_count = 0; i_count < all_cals.length; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month);
         var lessons = [];
 
@@ -99,7 +100,7 @@ function client_emails() {
                 all_clients.push(temp_client);
             }
         }
-
+*/
         // now with all clients and all lessons in our window collected we can begin
         for (ii = 0; ii < all_clients.length; ii++) {
 
