@@ -69,10 +69,12 @@ function client_emails() {
         }
       }
       if(temp_email.length > 1){
-        temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1]);
+        temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1], temp_thismonth, temp_nextmonth);
       }
       else{
         temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0]);
+        temp_client.thismonth = temp_thismonth;
+        temp_client.nextmonth = temp_nextmonth;
       }
       all_clients.push(temp_client);
 
@@ -176,7 +178,7 @@ function client_emails() {
             message = message + newline;
             message = message + "<br>Student Name: " + guardian_records[ii].client_records[jj].stud_fn + " " + guardian_records[ii].client_records[jj].stud_ln + "</br>";
             message = message + newline;
-            message = message + "<br>Instructor: " + guardian_records[ii].client_records[jj].inst.firstname + " " + guardian_records[ii].client_records[jj].inst.lastname + "</br>";
+            message = message + "<br>Instructor: " + guardian_records[ii].client_records[jj].inst + "</br>";
             message = message + newline;
             message = message + "<br>" + guardian_records[ii].client_records[jj].stud_fn;
             message = message + " had " + guardian_records[ii].client_records[jj].thismonth;
