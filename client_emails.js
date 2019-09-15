@@ -49,8 +49,11 @@ function client_emails() {
 
     // this loops through all instructors to
     // result in the guard record array
+    var calData = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0];
+    var cdLastRow = calData.getLastRow();
+    var calDataPile = calData.getRange(3, 1, cdLastRow-2, 13).getValues();
     all_clients = [];
-
+    debug; 
 /*    for (var i_count = 0; i_count < all_cals.length; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month);
         var lessons = [];
@@ -102,7 +105,7 @@ function client_emails() {
         }
 */
         // now with all clients and all lessons in our window collected we can begin
-        for (ii = 0; ii < all_clients.length; ii++) {
+/*        for (ii = 0; ii < all_clients.length; ii++) {
 
             for (jj = 0; jj < lessons.length; jj++) {
                 title = lessons[jj].title.split(' ');
@@ -134,7 +137,7 @@ function client_emails() {
             }
         }
     }
-
+*/
     // all client information for all instructors is in all_clients now
     // each guardian can have multiple client entries, client entries are per instructor
     for (ii = 0; ii < all_clients.length; ii++) {
