@@ -52,19 +52,37 @@ function client_emails() {
     var calData = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0];
     var cdLastRow = calData.getLastRow();
     var calDataPile = calData.getRange(3, 1, cdLastRow-2, 13).getValues();
+    var roster_vals = roster.getRange(active[0], 1, active[1] - active[0], 4).getValues();
     all_clients = [];
 
     for(var ii = 0; ii<calDataPile.length; ii++){
+      // pretty much everything but the email can be grabbed quickly from calendar
+      // data interpter
       var temp_ln = calDataPile[ii][0];
       var temp_fn = calDataPile[ii][1];
       var temp_guard = calDataPile[ii][2];
+      var temp_inst = calDataPile[ii][3];
       var temp_thismonth = calDataPile[ii][9];
       var temp_nextmonth = calDataPile[ii][11];
-      roster_vals = roster.getRange(active[0], 1, active[1] - active[0], 4).getValues();
-      debug;
+
+      // find the email address from the roster
+      for(var jj = 0; jj < roster_vals.length; jj++){
+        if(temp_ln == roster_vals[jj][0] && temp_guard == roster_vals[jj][2]){
+          temp_email = roster_vals[jj][3].split(',');
+          break;
+        }
+      }
+      if(temp_email.length > 1){
+        temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1]);
+      }
+      else{
+        temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0]);
+      }
+      all_clients.push(temp_client);
+
     }
 
-
+      debug;
 /*    for (var i_count = 0; i_count < all_cals.length; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month);
         var lessons = [];
@@ -115,40 +133,7 @@ function client_emails() {
             }
         }
 */
-        // now with all clients and all lessons in our window collected we can begin
-/*        for (ii = 0; ii < all_clients.length; ii++) {
 
-            for (jj = 0; jj < lessons.length; jj++) {
-                title = lessons[jj].title.split(' ');
-                firstname = all_clients[ii].stud_fn.split(' ');
-                lastname = all_clients[ii].stud_ln.split(' ')[0];
-
-                // check for cancellation or free trial, neither get counted for billing
-                if (title[0] == 'CANCELED' || title[0] == 'CANCELLED' || title[0] == '[CANCELLED]' || title[0] == '(CANCELLED)' || title[0] == 'FREE') {
-                }
-
-                // check for cancellation or free trial, neither get counted for billing
-                else if (title[1] == 'CANCELED' || title[1] == 'CANCELLED' || title[1] == '[CANCELLED]' || title[1] == '(CANCELLED)' || title[1] == 'FREE') {
-                }
-
-                // again we are checking to see if there is a match between client info and calendar info
-                else {
-                    for (kk = 0; kk < title.length; kk++){
-                        if ((title[kk] == firstname[0] && title[kk + 1] == lastname) || (title[kk] == firstname[0] && title[kk + 1] == firstname[1])) {
-                            if (lessons[jj].date >= begin_next_month) {
-                                all_clients[ii].nextmonth = all_clients[ii].nextmonth + 1;
-                            }
-                            else {
-                                all_clients[ii].thismonth = all_clients[ii].thismonth + 1;
-                            }
-                            kk = title.length;
-                        }
-                    }
-                }
-            }
-        }
-    }
-*/
     // all client information for all instructors is in all_clients now
     // each guardian can have multiple client entries, client entries are per instructor
     for (ii = 0; ii < all_clients.length; ii++) {
