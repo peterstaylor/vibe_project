@@ -41,10 +41,6 @@ function client_emails() {
 
     var active = active_range(roster);
 
-    var all_cals = CalendarApp.getAllCalendars();
-    all_cals = remove(all_cals);
-
-    var cal_names = calendar_names(all_cals);
     var guardian_records = [];
 
     // this loops through all instructors to
@@ -81,58 +77,6 @@ function client_emails() {
       all_clients.push(temp_client);
 
     }
-
-      debug;
-/*    for (var i_count = 0; i_count < all_cals.length; i_count++) {
-        var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month);
-        var lessons = [];
-
-        // creating data objects for each lesson within the window we are considering
-        for (ii = 0; ii < lesson_pile.length; ii++) {
-            var start = lesson_pile[ii].getStartTime();
-            var end = lesson_pile[ii].getEndTime();
-            var length = (end - start) / (1000 * 60 * 60);
-            var CAL = new CalendarInfo(lesson_pile[ii].getTitle(), start, length, lesson_pile[ii].getLocation());
-            lessons.push(CAL);
-        }
-
-        // returning the column that counts up the number of instructor lessons
-        var column = column_find(roster, cal_names, i_count);
-
-        //collect all clients under this particular instructor
-        roster_vals = roster.getRange(active[0], 1, active[1] - active[0], column).getValues();
-
-
-        for (ii = 0; ii < roster_vals.length; ii++) {
-            if (roster_vals[ii][column - 1]) {
-                temp_ln = roster_vals[ii][0];
-                temp_fn = roster_vals[ii][1];
-                temp_guard = roster_vals[ii][2];
-                temp_email = roster_vals[ii][3].split(',');
-
-                // if email is blank, correct email is always stored a row or two up in the master roster
-                // scan upwards until you get a hit
-                if (temp_email[0] == "") {
-                    jj = 1;
-                    while (temp_email[0] == "") {
-                        temp_email = roster_vals[ii - jj][3].split(',');
-                        jj = jj + 1;
-                    }
-                }
-
-                if (temp_email.length > 1) {
-                    temp_client = new Client(cal_names[i_count], temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1]);
-                }
-                else {
-                    temp_client = new Client(cal_names[i_count], temp_ln, temp_fn, temp_guard, temp_email[0]);
-                }
-                // initialize these to zero so we can count later
-                temp_client.thismonth = 0;
-                temp_client.nextmonth = 0;
-                all_clients.push(temp_client);
-            }
-        }
-*/
 
     // all client information for all instructors is in all_clients now
     // each guardian can have multiple client entries, client entries are per instructor
