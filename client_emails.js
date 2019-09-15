@@ -53,7 +53,18 @@ function client_emails() {
     var cdLastRow = calData.getLastRow();
     var calDataPile = calData.getRange(3, 1, cdLastRow-2, 13).getValues();
     all_clients = [];
-    debug; 
+
+    for(var ii = 0; ii<calDataPile.length; ii++){
+      var temp_ln = calDataPile[ii][0];
+      var temp_fn = calDataPile[ii][1];
+      var temp_guard = calDataPile[ii][2];
+      var temp_thismonth = calDataPile[ii][9];
+      var temp_nextmonth = calDataPile[ii][11];
+      roster_vals = roster.getRange(active[0], 1, active[1] - active[0], 4).getValues();
+      debug;
+    }
+
+
 /*    for (var i_count = 0; i_count < all_cals.length; i_count++) {
         var lesson_pile = all_cals[i_count].getEvents(begin_this_month, end_next_month);
         var lessons = [];
