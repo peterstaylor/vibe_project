@@ -48,7 +48,8 @@ function client_emails() {
     var calData = SpreadsheetApp.openById('1isEdFurIx497X4XgrO5PDwA45wpc3Jo_psnS8MZmsi8').getSheets()[0];
     var cdLastRow = calData.getLastRow();
     var calDataPile = calData.getRange(3, 1, cdLastRow-2, 13).getValues();
-    var roster_vals = roster.getRange(active[0], 1, active[1] - active[0], 4).getValues();
+    var rosterLastColumn = roster.getLastColumn();
+    var roster_vals = roster.getRange(active[0], 1, active[1] - active[0], rosterLastColumn).getValues();
     all_clients = [];
 
     for(var ii = 0; ii<calDataPile.length; ii++){
@@ -57,7 +58,7 @@ function client_emails() {
       var temp_ln = calDataPile[ii][0];
       var temp_fn = calDataPile[ii][1];
       var temp_guard = calDataPile[ii][2];
-      var temp_inst = calDataPile[ii][3];
+      var temp_inst_fn = calDataPile[ii][3]; 
       var temp_thismonth = calDataPile[ii][9];
       var temp_nextmonth = calDataPile[ii][11];
 
@@ -68,6 +69,8 @@ function client_emails() {
           break;
         }
       }
+
+      // find instructor from the roster
       if(temp_email.length > 1){
         temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1], temp_thismonth, temp_nextmonth);
       }
