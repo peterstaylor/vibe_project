@@ -58,7 +58,9 @@ function client_emails() {
       var temp_ln = calDataPile[ii][0];
       var temp_fn = calDataPile[ii][1];
       var temp_guard = calDataPile[ii][2];
-      var temp_inst_fn = calDataPile[ii][3]; 
+      var temp_inst_fn = calDataPile[ii][3].split(" ")[0];
+      var temp_inst_ln = calDataPile[ii][3].split(" ")[1];
+      var temp_inst = new instructor(temp_inst_fn, temp_inst_ln);
       var temp_thismonth = calDataPile[ii][9];
       var temp_nextmonth = calDataPile[ii][11];
 
@@ -70,9 +72,8 @@ function client_emails() {
         }
       }
 
-      // find instructor from the roster
       if(temp_email.length > 1){
-        temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1], temp_thismonth, temp_nextmonth);
+        temp_client = new Client (temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1], temp_thismonth, temp_nextmonth);
       }
       else{
         temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0]);
@@ -181,7 +182,7 @@ function client_emails() {
             message = message + newline;
             message = message + "<br>Student Name: " + guardian_records[ii].client_records[jj].stud_fn + " " + guardian_records[ii].client_records[jj].stud_ln + "</br>";
             message = message + newline;
-            message = message + "<br>Instructor: " + guardian_records[ii].client_records[jj].inst + "</br>";
+            message = message + "<br>Instructor: " + guardian_records[ii].client_records[jj].inst.firstname + " " + guardian_records[ii].client_records[jj].inst.lastname + "</br>";
             message = message + newline;
             message = message + "<br>" + guardian_records[ii].client_records[jj].stud_fn;
             message = message + " had " + guardian_records[ii].client_records[jj].thismonth;
