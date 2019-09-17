@@ -71,7 +71,6 @@ var emails = [];
           }
           if (scannedLN == instLN && scannedFN == instFN){
             instEmail = range[aa][4];
-            emails.push(instEmail);
             break;
           }
         }
@@ -89,6 +88,7 @@ var emails = [];
         }
 
         if (alreadySent == false){
+          emails.push(instEmail);
           var headline = "TIME SENSITIVE: Please reach out to " + client;
           var message = "<br>Hello " + instFN + ",</br>";
           message = message + "<br>It's been requested by " + client + " that you reach out at your ";
@@ -110,5 +110,19 @@ var emails = [];
       }
     }
   }
+  if (emails.length > 0){
+    var debugmsg = "";
+    for(rr=0 ; rr<emails.length; rr++){
+      debugmsg = debugmsg + "<br>" + emails[rr] + "</br>";
+    }
+  }
+  else{
+    var debugmsg = "No emails to send at this time";
+  }
+  MailApp.sendEmail({
+    to: "peters.taylor@gmail.com",
+    subject: "Instructor Notification Debug",
+    htmlBody: debugmsg,
+  })
   logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
 }
