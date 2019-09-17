@@ -55,7 +55,7 @@ var emails = [];
         var description = form.getDescription().split("\n");
         var instFN = description[0].split(" ")[1];
         var instLN = description[0].split(" ")[2];
-        var client = description[1].split(" ")[1] + " " + description[1].split(" ")[2]; 
+        var client = description[1].split(" ")[1] + " " + description[1].split(" ")[2];
 
         // grabbing the instructor's email
         // after this loop aa contains the instructor row
@@ -75,7 +75,11 @@ var emails = [];
             break;
           }
         }
-
+        var studentNameArray = contact_forms[ii].getName().split(" ");
+        var studentName = "";
+        for(var xx = 3; xx < studentNameArray.length; xx++){
+          studentName = studentName + studentNameArray[xx] + " ";
+        }
         // check the spreadsheet for matches in the last 24 hours of sends
         for (var zz = 0; zz <logRange.length; zz++){
           if(logRange[zz][1] == studentName && logRange[zz][2] == client && logRange[zz][3] == instLN && logRange[zz][4] == instFN){
