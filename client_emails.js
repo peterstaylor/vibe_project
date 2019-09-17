@@ -64,7 +64,7 @@ function client_emails() {
           }
         }
         // this is currently ignoring the (INVOICE) appendation
-        // todo: add feature to LOOK for that line 
+        // todo: add feature to LOOK for that line
         if(temp_email.length > 1){
           var first = temp_email[0].split(" ");
           var second = temp_email[1].split(" ");
@@ -230,7 +230,6 @@ function client_emails() {
 
 
       }
-      debug;
     }
 
 }
