@@ -52,10 +52,10 @@ var emails = [];
           var range = instSS.getDataRange().getValues();
           opened = true;
         }
-        var studentNameArray = contact_forms[ii].getName().split(" ");
         var description = form.getDescription().split("\n");
         var instFN = description[0].split(" ")[1];
         var instLN = description[0].split(" ")[2];
+        var client = description[1].split(" ")[1] + " " + description[1].split(" ")[2]; 
 
         // grabbing the instructor's email
         // after this loop aa contains the instructor row
@@ -76,13 +76,6 @@ var emails = [];
           }
         }
 
-        var client = description[1].split(":")[1].substring(1);
-
-        for(mm = 3; mm < studentNameArray.length; mm++){
-          studentName = studentName + studentNameArray[mm] + " "
-        }
-        studentName = studentName.substring(0, studentName.length -1)
-
         // check the spreadsheet for matches in the last 24 hours of sends
         for (var zz = 0; zz <logRange.length; zz++){
           if(logRange[zz][1] == studentName && logRange[zz][2] == client && logRange[zz][3] == instLN && logRange[zz][4] == instFN){
@@ -98,7 +91,7 @@ var emails = [];
           message = message + "earliest convenience to fix a discrepancy in your teaching calendar that pertains ";
           message = message + "to their upcoming invoice. Please do so as soon as possible.</br>";
           message = message + "<br></br>";
-          message = message + "<br>Thank you!</br>"; 
+          message = message + "<br>Thank you!</br>";
           instEmail = "peters.taylor@gmail.com"
           MailApp.sendEmail({
             to: instEmail,
