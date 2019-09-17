@@ -3,15 +3,14 @@ function notify_instructors(){
   var contact_forms = [];
 
 // collecting all instructor contact forms
+var emails = [];
   while(all.hasNext()){
     var tmp = all.next();
     var name = tmp.getName().split(" ");
-    var len = name.length;
-    var b1 = name[len-1] == "Form";
-    var b2 = name[len-2] == "Contact";
-    var b3 = name[len-3] == "Instructor";
+    var b1 = name[0] == "Calendar";
+    var b2 = name[1] == "Discrepancy";
 
-    if (b1 && b2 && b3){
+    if (b1 && b2){
       contact_forms.push(tmp);
     }
   }
@@ -49,7 +48,6 @@ function notify_instructors(){
         // to do: add error handling so if instructor email is unset we get a notification
         var instEmail = "unset";
         if(opened == false){
-          //todo open spreadsheet and grab instructor email address
           var instSS = SpreadsheetApp.openById("1zDeEDDzH7i7SLFz4YBZe6xRYOZXC0e7Ge3nbYgX0Ew4").getSheets()[0];
           var range = instSS.getDataRange().getValues();
           opened = true;
@@ -73,18 +71,14 @@ function notify_instructors(){
           }
           if (scannedLN == instLN && scannedFN == instFN){
             instEmail = range[aa][4];
+            emails.push(instEmail);
             break;
           }
         }
 
         var client = description[1].split(":")[1].substring(1);
 
-        for(nn = 0; nn<studentNameArray.length; nn++){
-          if(studentNameArray[nn] == "Instructor")
-            break;
-        }
-        var studentName = "";
-        for(mm = 0; mm < nn; mm++){
+        for(mm = 3; mm < studentNameArray.length; mm++){
           studentName = studentName + studentNameArray[mm] + " "
         }
         studentName = studentName.substring(0, studentName.length -1)
@@ -98,11 +92,13 @@ function notify_instructors(){
         }
 
         if (alreadySent == false){
-          var headline = client + " has requested you to contact them";
+          var headline = "TIME SENSITIVE: Please reach out to " + client;
           var message = "<br>Hello " + instFN + ",</br>";
-          message = message + "<br>Your client " + client + " has logged a request for you to ";
-          message = message + "contact them regarding " + studentName + "'s recent lessons.</br>";
-          message = message + "<br>Please contact them at your earliest convenience to sort out any issues.</br>"
+          message = message + "<br>It's been requested by " + client + " that you reach out at your ";
+          message = message + "earliest convenience to fix a discrepancy in your teaching calendar that pertains ";
+          message = message + "to their upcoming invoice. Please do so as soon as possible.</br>";
+          message = message + "<br></br>";
+          message = message + "<br>Thank you!</br>"; 
           instEmail = "peters.taylor@gmail.com"
           MailApp.sendEmail({
             to: instEmail,
