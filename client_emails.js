@@ -194,11 +194,6 @@ function client_emails() {
           }
         }
         message = message + "<br>---</br>";
-        message = message + "<br>Thank you very much for your assistance in maintaining an ";
-        message = message + "accurate account of lessons for billing purposes.</br>";
-        message = message + "<br>Please respond to this email if you have any questions.</br>";
-        message = message + newline;
-        message = message + "<br>Closer closer closer closer, can put whatever text you want here.</br>";
         message = message + "</p>";
 
         // todo: add functionality so this can be rolled out to only certain clients
