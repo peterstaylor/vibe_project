@@ -147,12 +147,11 @@ function client_emails() {
           message = message + "<br>Vibe Music Academy</br>";
           for (jj = 0; jj < guardian_records[ii].client_records.length; jj++) {
               if (!(guardian_records[ii].client_records[jj].thismonth == 0 && guardian_records[ii].client_records[jj].nextmonth == 0)){
-              var formtitle = guardian_records[ii].client_records[jj].stud_fn;
-              formtitle = formtitle + " " + guardian_records[ii].client_records[jj].stud_ln;
-              formtitle = formtitle + " Instructor Contact Form";
-              var existing = DriveApp.getFilesByName(formtitle);
-              var neednew = true;
-              while(existing.hasNext()){
+                var formtitle = "Calendar Discrepancy for " + guardian_records[ii].client_records[jj].stud_fn;
+                formtitle = formtitle + " " + guardian_records[ii].client_records[jj].stud_ln;
+                var existing = DriveApp.getFilesByName(formtitle);
+                var neednew = true;
+                while(existing.hasNext()){
                   var file = existing.next();
                   var tmpform = FormApp.openById(file.getId());
                   var tmpdesc = tmpform.getDescription().split(" ");
@@ -175,7 +174,7 @@ function client_emails() {
                 form.setRequireLogin(false);
                 var url = form.getPublishedUrl();
                 var item = form.addMultipleChoiceItem();
-                item.setTitle("Would you like to report an issue with the lesson tally this month? If you select 'yes' your instructor will be notified to contact you.")
+                item.setTitle("Would you like us to prompt your instructor to reach out at their earliest conveinence to reconcile their calendar with you?")
                     .setChoices([
                     item.createChoice('Yes'),
                     item.createChoice('No')
