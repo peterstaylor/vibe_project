@@ -155,8 +155,9 @@ function client_emails() {
                   var file = existing.next();
                   var tmpform = FormApp.openById(file.getId());
                   var tmpdesc = tmpform.getDescription().split(" ");
+                  var subtmp = tmpdesc[2].split("\n")[0];
                   b1 = tmpdesc[1] == guardian_records[ii].client_records[jj].inst.firstname;
-                  b2 = tmpdesc[2] == guardian_records[ii].client_records[jj].inst.lastname;
+                  b2 = subtmp == guardian_records[ii].client_records[jj].inst.lastname;
                   if(b1 && b2){
                     var form = tmpform;
                     neednew = false;
