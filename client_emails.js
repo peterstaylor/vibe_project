@@ -131,7 +131,17 @@ function client_emails() {
         var message = "<p>";
         message = message + "Dear " + guardian_records[ii].name + ","
         message = message + newline;
-        message = message + "<br>This is some placeholder text for John to help me write.</br>"
+        message = message + "<br>Here is a recap of the sessions that your Vibe instructor(s) recorded ";
+        message = message + "as having taken place this month, as well as a projection of what they have ";
+        message = message + "planned for the next month. Your invoice for next month will be sent in a few days, ";
+        message = message + "and we we'll base it on this info.</br>";
+        message = message + newline;
+        message = message + "<br>If anything seems incorrect, simply click on the appropriate link and follow the prompt ";
+        message = message + "to flag your instructor, and they will receive a notification to reach out to you. </br>";
+        message = message + "<br>(Note: you won't receive another summary email after changes are made.)</br>";
+        message = message + newline;
+        message = message + "<br>We're thankful to be working with you!</br>";
+        message = message + "<br>Vibe Music Academy</br>";
         for (jj = 0; jj < guardian_records[ii].client_records.length; jj++) {
             if (!(guardian_records[ii].client_records[jj].thismonth == 0 && guardian_records[ii].client_records[jj].nextmonth == 0)){
             var formtitle = guardian_records[ii].client_records[jj].stud_fn;
@@ -179,12 +189,8 @@ function client_emails() {
             message = message + "<br>" + guardian_records[ii].client_records[jj].stud_fn;
             message = message + " had " + guardian_records[ii].client_records[jj].thismonth;
             message = message + " lessons this month and has " + guardian_records[ii].client_records[jj].nextmonth;
-            message = message + " lessons scheduled next month.</br>";
-            message = message + "<br>If there are any issues with this, please click the link below";
-            message = message + " to fill out a form that will result in your instructor contacting you";
-            message = message + " in order to rectify the situation.</br>";
-            // todo: this link will be to the actual form eventually
-            message = message + "<br><a href ='" + url + "'>Link to click.</a></br>";
+            message = message + " lessons planned for next month.</br>";
+            message = message + "<br><a href ='" + url + "'>If this info seems incorrect, please click here.</a></br>";
           }
         }
         message = message + "<br>---</br>";
@@ -205,7 +211,7 @@ function client_emails() {
           email_dest = testEmail;
         }
 
-        var headline = "Your Monthly Lesson Report From Vibe Music Academy";
+        var headline = "Your Monthly Instruction Summary - From Vibe";
         if (emailsSent <= testCount && emailsSent < testStable.length){
           MailApp.sendEmail({
               to:email_dest,
