@@ -63,12 +63,16 @@ function client_emails() {
             break;
           }
         }
-
+        // this is currently ignoring the (INVOICE) appendation
+        // todo: add feature to LOOK for that line 
         if(temp_email.length > 1){
-          temp_client = new Client (temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0], temp_email[1], temp_thismonth, temp_nextmonth);
+          var first = temp_email[0].split(" ");
+          var second = temp_email[1].split(" ");
+          temp_client = new Client (temp_inst, temp_ln, temp_fn, temp_guard, first[0], second[0], temp_thismonth, temp_nextmonth);
         }
         else{
-          temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, temp_email[0]);
+          var first = temp_email[0].split(" ");
+          temp_client = new Client(temp_inst, temp_ln, temp_fn, temp_guard, first[0]);
           temp_client.thismonth = temp_thismonth;
           temp_client.nextmonth = temp_nextmonth;
         }
