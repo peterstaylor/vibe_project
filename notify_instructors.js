@@ -96,7 +96,7 @@ var emails = [];
           message = message + "to their upcoming invoice. Please do so as soon as possible.</br>";
           message = message + "<br></br>";
           message = message + "<br>Thank you!</br>";
-          instEmail = "peters.taylor@gmail.com"
+          //instEmail = "peters.taylor@gmail.com"
           MailApp.sendEmail({
             to: instEmail,
             subject: headline,
