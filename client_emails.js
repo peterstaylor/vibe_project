@@ -206,8 +206,8 @@ function client_emails() {
 
           if(!testRolloutBool && rolloutBool){
             // this stays here until i'm certain everything is working
-            email_dest = "peters.taylor@gmail.com";
-            //email_dest = guardian_records[ii].email;
+            //email_dest = "peters.taylor@gmail.com";
+            email_dest = guardian_records[ii].email;
           }
           else{
             email_dest = testEmail;
