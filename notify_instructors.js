@@ -120,7 +120,7 @@ var emails = [];
     var debugmsg = "No emails to send at this time";
   }
   MailApp.sendEmail({
-    to: "peters.taylor@gmail.com",
+    to: "john@vibemusicacademy.com",
     subject: "Instructor Notification Debug",
     htmlBody: debugmsg,
   })
