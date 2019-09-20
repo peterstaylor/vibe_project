@@ -115,14 +115,12 @@ var emails = [];
     for(rr=0 ; rr<emails.length; rr++){
       debugmsg = debugmsg + "<br>" + emails[rr] + "</br>";
     }
+    MailApp.sendEmail({
+      to: "john@vibemusicacademy.com",
+      subject: "Instructor Notification Debug",
+      htmlBody: debugmsg,
+    })
   }
-  else{
-    var debugmsg = "No emails to send at this time";
-  }
-  MailApp.sendEmail({
-    to: "john@vibemusicacademy.com",
-    subject: "Instructor Notification Debug",
-    htmlBody: debugmsg,
-  })
+
   logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
 }
