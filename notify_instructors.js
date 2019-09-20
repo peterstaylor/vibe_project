@@ -89,6 +89,9 @@ var emails = [];
 
         if (alreadySent == false){
           emails.push(instEmail);
+          if(instEmail == "charlie@vibemusicacademy.com"){
+            instEmail = "john@vibemusicacademy.com"; 
+          }
           var headline = "TIME SENSITIVE: Please reach out to " + client;
           var message = "<br>Hello " + instFN + ",</br>";
           message = message + "<br>It's been requested by " + client + " that you reach out at your ";
