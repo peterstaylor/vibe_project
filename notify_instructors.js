@@ -55,7 +55,11 @@ var emails = [];
         var description = form.getDescription().split("\n");
         var instFN = description[0].split(" ")[1];
         var instLN = description[0].split(" ")[2];
-        var client = description[1].split(" ")[1] + " " + description[1].split(" ")[2];
+        var client = "";
+        for(var xx = 1; xx < description[1].split(" ").length - 1; xx++){
+          client = client + description[1].split(" ")[xx] + " ";
+        }
+        client = client + description[1].split(" ")[xx];
 
         // grabbing the instructor's email
         // after this loop aa contains the instructor row
@@ -90,7 +94,7 @@ var emails = [];
         if (alreadySent == false){
           emails.push(instEmail);
           if(instEmail == "charlie@vibemusicacademy.com"){
-            instEmail = "john@vibemusicacademy.com"; 
+            instEmail = "john@vibemusicacademy.com";
           }
           var headline = "TIME SENSITIVE: Please reach out to " + client;
           var message = "<br>Hello " + instFN + ",</br>";
