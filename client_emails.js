@@ -214,7 +214,7 @@ function client_emails() {
           }
 
           var headline = "Your Monthly Instruction Summary - From Vibe";
-          if (emailsSent <= testCount && emailsSent < testStable.length){
+          if ((emailsSent <= testCount && emailsSent < testStable.length) || (testRolloutBool == false && emailsSent < testStable.length) || rolloutBool == true){
             MailApp.sendEmail({
                 to:email_dest,
                 subject: headline,
