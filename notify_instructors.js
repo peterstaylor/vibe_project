@@ -109,7 +109,7 @@ var emails = [];
             subject: headline,
             htmlBody: message,
           })
-          //todo : add code here to print emailed info to log spreadsheet
+          
           var now = new Date();
           var newRow = [now, studentName, client, instLN, instFN];
           logRange.push(newRow);
