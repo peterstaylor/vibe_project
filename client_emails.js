@@ -204,7 +204,7 @@ function client_emails() {
           message = message + "</p>";
 
 
-          if(!testRolloutBool && rolloutBool){
+          if(!testRolloutBool){
             // this stays here until i'm certain everything is working
             //email_dest = "peters.taylor@gmail.com";
             email_dest = guardian_records[ii].email;
