@@ -117,16 +117,16 @@ var emails = [];
       }
     }
   }
-  if (emails.length > 0){
-    var debugmsg = "";
-    for(rr=0 ; rr<emails.length; rr++){
-      debugmsg = debugmsg + "<br>" + emails[rr] + "</br>";
-    }
-    MailApp.sendEmail({
-      to: "john@vibemusicacademy.com",
-      subject: "Instructor Notification Debug",
-      htmlBody: debugmsg,
-    })
+  //if (emails.length > 0){
+  //  var debugmsg = "";
+  //  for(rr=0 ; rr<emails.length; rr++){
+  //    debugmsg = debugmsg + "<br>" + emails[rr] + "</br>";
+  //  }
+  //  MailApp.sendEmail({
+  //    to: "john@vibemusicacademy.com",
+  //    subject: "Instructor Notification Debug",
+  //    htmlBody: debugmsg,
+  //  })
   }
 
   logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
