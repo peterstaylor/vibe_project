@@ -141,9 +141,9 @@ function client_emails() {
           message = message + "<br>Here is a recap of the sessions that your Vibe instructor(s) recorded ";
           message = message + "as having taken place this month, as well as a projection of what they have ";
           message = message + "planned for the next month. Your invoice for next month will be sent in a few days, ";
-          message = message + "and we we'll base it on this info.</br>";
+          message = message + "and we will base it on this info.</br>";
           message = message + newline;
-          message = message + "<br>If anything seems incorrect, simply click on the appropriate link and follow the prompt ";
+          message = message + "<br>If anything seems incorrect <i>please do not reply to this email</i>, simply click on the appropriate link and follow the prompt ";
           message = message + "to flag your instructor, and they will receive a notification to reach out to you. </br>";
           message = message + "<br>(Note: you won't receive another summary email after changes are made.)</br>";
           message = message + newline;
@@ -176,6 +176,7 @@ function client_emails() {
                 formdesc = formdesc + "Client: " + guardian_records[ii].name + " " + guardian_records[ii].client_records[0].stud_ln;
                 var form = FormApp.create(formtitle);
                 form.setDescription(formdesc);
+                form.setConfirmationMessage("Thanks. Your instructor will be notified to email you within the next five minutes.");
                 form.setRequireLogin(false);
                 var url = form.getPublishedUrl();
                 var item = form.addMultipleChoiceItem();
@@ -213,7 +214,7 @@ function client_emails() {
             email_dest = testEmail;
           }
 
-          var headline = "Your Monthly Instruction Summary - From Vibe";
+          var headline = "NOREPLY: Your Monthly Instruction Summary - From Vibe";
           if ((emailsSent <= testCount && emailsSent < testStable.length) || (testRolloutBool == false && emailsSent < testStable.length) || rolloutBool == true){
             MailApp.sendEmail({
                 to:email_dest,
