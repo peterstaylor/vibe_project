@@ -43,6 +43,7 @@ var emails = [];
     if (responses.length > 0){
       var resplen = responses.length;
       var answer = responses[resplen-1].getItemResponses()[0].getResponse();
+      var context = responses[resplen-1].getItemResponses()[1].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
         // to do: add error handling so if instructor email is unset we get a notification
@@ -102,6 +103,11 @@ var emails = [];
           message = message + "earliest convenience to fix a discrepancy in your teaching calendar that pertains ";
           message = message + "to their upcoming invoice. Please do so as soon as possible.</br>";
           message = message + "<br></br>";
+          if (context.length > 1){
+            message = message + "<br>The client provided the following additional context: <br>";
+            message = message + "<br><i>" + context + "</i></br>";
+            message = message + "<br></br>";
+          }
           message = message + "<br>Thank you!</br>";
           //instEmail = "peters.taylor@gmail.com"
           MailApp.sendEmail({
@@ -109,7 +115,7 @@ var emails = [];
             subject: headline,
             htmlBody: message,
           })
-          
+
           var now = new Date();
           var newRow = [now, studentName, client, instLN, instFN];
           logRange.push(newRow);
