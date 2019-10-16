@@ -3,7 +3,7 @@ function notify_instructors(){
   var contact_forms = [];
 
 // collecting all instructor contact forms
-var emails = [];
+  var emails = [];
   while(all.hasNext()){
     var tmp = all.next();
     var name = tmp.getName().split(" ");
@@ -133,7 +133,7 @@ var emails = [];
   //    subject: "Instructor Notification Debug",
   //    htmlBody: debugmsg,
   //  })
-  }
+  //}
 
   logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
 }
