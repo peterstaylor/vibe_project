@@ -187,6 +187,8 @@ function client_emails() {
                     ])
                     .showOtherOption(false);
               }
+                var item2 = form.addParagraphTextItem();
+                item2.setTitle("Would you like to include any additional context to your instructor? (not required)"); 
               var url = form.getPublishedUrl();
               message = message + "<br>---</br>";
               message = message + newline;
