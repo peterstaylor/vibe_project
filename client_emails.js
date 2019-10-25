@@ -11,11 +11,12 @@ function client_emails() {
     var rollout = gui.getRange(7, 1, 1,1).getValue();
     var testRolloutBool = false;
 
+    var Avals = gui.getRange("F2:F").getValues();
+    var Alast = Avals.filter(String).length;
+    var testStable = gui.getRange(2,6,Alast, 2).getValues();
+
     if (rollout == "No"){
       var rolloutBool = false
-      var Avals = gui.getRange("F2:F").getValues();
-      var Alast = Avals.filter(String).length;
-      var testStable = gui.getRange(2,6,Alast, 2).getValues();
       var test = gui.getRange(10,1,1,1).getValue();
       if(test == "Yes"){
         testRolloutBool = true;
@@ -188,7 +189,7 @@ function client_emails() {
                     .showOtherOption(false);
               }
                 var item2 = form.addParagraphTextItem();
-                item2.setTitle("Would you like to include any additional context to your instructor? (not required)"); 
+                item2.setTitle("Would you like to include any additional context to your instructor? (not required)");
               var url = form.getPublishedUrl();
               message = message + "<br>---</br>";
               message = message + newline;
