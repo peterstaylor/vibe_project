@@ -75,7 +75,7 @@ function notify_instructors(){
             var scannedFN = "other dummy"
           }
           if (scannedLN == instLN && scannedFN == instFN){
-            instEmail = range[aa][4];
+            instEmail = range[aa][3];
             break;
           }
         }
