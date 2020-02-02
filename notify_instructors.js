@@ -20,17 +20,19 @@ function notify_instructors(){
   var logSS = SpreadsheetApp.openById("1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI").getSheets()[1];
   var logRange = logSS.getDataRange().getValues();
 
+
  // new code to check for old data in the email out log
   if (logRange.length > 1){
-    var checkTime = new Date();
-    checkTime.setDate(checkTime.getDate() -1);
-    for (ii = 0; ii<logRange.length; ii++){
-      if (logRange[ii][0] < checkTime){
-        logRange.splice(ii, 1);
+    for(ii = 0; ii<logRange.length; ii++){
+      var yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1)
+      if(logRange[ii][0] <= yesterday){
+        logRange.splice(ii,1);
         ii = ii - 1;
       }
     }
   }
+
   for(ii = 0; ii<contact_forms.length; ii++){
     var alreadySent = false;
     var id = contact_forms[ii].getId();
@@ -134,6 +136,8 @@ function notify_instructors(){
   //    htmlBody: debugmsg,
   //  })
   //}
-
+  var LC = logSS.getLastColumn();
+  var LR = logSS.getLastRow();
+  logSS.getRange(2, 1, LR, LC).clear(); 
   logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
 }
