@@ -18,6 +18,7 @@ function notify_instructors(){
   var opened = false;
   var alreadySent = false;
   var logSS = SpreadsheetApp.openById("1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI").getSheets()[1];
+  var rawLog = SpreadsheetApp.openById("1dqGPiFz4jNzQCKopn64r6C2Hak0dcvB2IHVKLCR8xtI").getSheets()[2]
   var logRange = logSS.getDataRange().getValues();
 
 
@@ -41,6 +42,7 @@ function notify_instructors(){
     start.setHours(0,0,0,0);
     var responses = form.getResponses(start);
 
+
     // this is the condition that we check to see if we need to send a message
     if (responses.length > 0){
       var resplen = responses.length;
@@ -48,6 +50,10 @@ function notify_instructors(){
       var context = responses[resplen-1].getItemResponses()[1].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
+        var info = form.getDescription();
+        var now = new Date();
+        var last = rawLog.getLastRow();
+        rawLog.getRange(last+1,1, 1, 2).setValues([[now, info]]);
         // to do: add error handling so if instructor email is unset we get a notification
         var instEmail = "unset";
         if(opened == false){
@@ -138,6 +144,6 @@ function notify_instructors(){
   //}
   var LC = logSS.getLastColumn();
   var LR = logSS.getLastRow();
-  logSS.getRange(2, 1, LR, LC).clear(); 
+  logSS.getRange(2, 1, LR, LC).clear();
   logSS.getRange(1,1, logRange.length, 5).setValues(logRange);
 }
