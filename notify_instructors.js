@@ -50,10 +50,12 @@ function notify_instructors(){
       var context = responses[resplen-1].getItemResponses()[1].getResponse();
       // if this is true we know to notify the instructor
       if (answer == "Yes"){
+        // this does a simple logging operation
         var info = form.getDescription();
         var now = new Date();
         var last = rawLog.getLastRow();
         rawLog.getRange(last+1,1, 1, 2).setValues([[now, info]]);
+
         // to do: add error handling so if instructor email is unset we get a notification
         var instEmail = "unset";
         if(opened == false){
