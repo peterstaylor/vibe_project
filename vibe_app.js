@@ -64,7 +64,6 @@ function top_level() {
                 LESSONS.push(CAL);
             }
 
-
             //get the location column
             var location_col = 0;
             for (var jj = 17; location_col == 0; jj++) {
@@ -116,6 +115,7 @@ function top_level() {
                         travel_fee.push(roster.getRange(ii, travel_col, 1, 1).getValue());
                     }
                 }
+
 
 
                 // instructor Array contains
